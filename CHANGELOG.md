@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.1.1
+
+### Feature
+
+* enable multiprocessing (4479ecc08dca)
+
 ## v0.1.0
 
 ### Feature
