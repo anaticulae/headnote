@@ -12,9 +12,11 @@ pdf-pages.
 There are one different strategies:
 
 - CommonTextStrategy
+- Fixed
 """
 
 import abc
+import collections
 import dataclasses
 import typing
 
@@ -69,3 +71,39 @@ class HeadnoteDetectionStrategy(abc.ABC):
             return None
         pageheight = selected.height
         return pageheight
+
+
+def remove_duplication(items: list) -> list:
+    """In some cases more than one potential header or footer are
+    detected for one page. This method judges the problem and select the
+    `best` result.
+
+    Args:
+        items: list of `PageContentFooterHeader`
+    Returns:
+        sorted list without page duplications
+    """
+    source = collections.defaultdict(list)
+    for item in items:
+        source[item.page].append(item)
+    result = [multijudgement(item) for item in source.values()]
+    result = sorted(result, key=lambda x: x.page)
+    return result
+
+
+def multijudgement(judges):
+    # TODO: Strategy how to judge multiple matches
+    # BIGGER ONE, ITEM OF BIGGER CLUSTER?
+
+    def count_item(item):
+        return int(item.footer is not None) + int(item.header is not None)
+
+    current = judges[0]
+    count = count_item(current)
+    for item in judges[1:]:
+        cur_count = count_item(item)
+        if cur_count < count:
+            continue
+        current = item
+        count = cur_count
+    return current
