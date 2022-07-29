@@ -7,12 +7,101 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import collections
+import typing
+
+import iamraw
+import serializeraw
 import utila
 
 
 def work(
     xcommon: str,
     xfixed: str,
+    pages: tuple = None,
 ) -> str:
-    result = utila.file_read(xcommon)
+    common = serializeraw.load_headerfooter(
+        xcommon,
+        pages=pages,
+    )
+    fixed = serializeraw.load_headerfooter(
+        xfixed,
+        pages=pages,
+    )
+    results = [
+        common,
+        fixed,
+    ]
+    juged = judge_strategy(results)
+    dumped = serializeraw.dump_headerfooter(juged)
+    return dumped
+
+
+def judge_strategy(
+    results: typing.List[iamraw.PageContentFooterHeaders],
+) -> iamraw.PageContentFooterHeaders:
+    """Decide which results fits best.
+
+    Zip result of different strategies. Sometimes there are multiple
+    options, therefore we have to use the priorities below.
+
+    Sources/Concept:
+
+        - MovingFooter:                footer (first prio)
+        - Pages:                       footer (second prio)
+        - FixedFooter:      header and footer (third prio)
+        - Common:           header            (last prio)
+        - PlainMoving:
+
+    Args:
+        results: lists of `groupme.footer.FooterHeaderDetectionStrategy`.result
+    Returns:
+        list of zipped result
+    """
+    assert results is not None, 'require list of strategy results'
+    qualities = quality(results)
+    result = []
+    for pagenumber, (
+            common,
+            fixed,
+    ) in utila.sync_pages(results):
+        header = fixed.header if fixed else None
+        footer = fixed.footer if fixed else None
+        footer_best = 'fixed' if fixed else None
+        if common and common.header:
+            if not header:
+                header = common.header
+            elif qualities[0] == max(qualities):
+                # compare quality of both extractions
+                # TODO: MORE THAN ONE EXTRACTION CAN HAVE BEST
+                # EXTRACTION QUALITY.
+                header = common.header
+        # log footer best
+        if footer_best:
+            utila.verbose(f'footer: {pagenumber} {footer_best}')
+        current = iamraw.PageContentFooterHeader(
+            header=header,
+            footer=footer,
+            page=pagenumber,
+        )
+        result.append(current)
+    page_order = [item.page for item in result]
+    assert utila.isascending(page_order), page_order
+    return result
+
+
+def quality(results: list) -> tuple:
+    """Determine quality[0.0, 1.0] of every extraction strategy."""
+    # count number of page
+    pages = set()
+    # count result for every strategy
+    counter = collections.defaultdict(int)
+    for pagenumber, data in utila.sync_pages(results):
+        pages.add(pagenumber)
+        for index, item in enumerate(data):
+            if not item:
+                continue
+            counter[index] += 1
+    result = tuple(counter[index] / len(pages) if pages else 0
+                   for index, _ in enumerate(results))
     return result
