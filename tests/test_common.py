@@ -10,27 +10,26 @@
 import power
 import serializeraw
 import utila
-import utilatest
 
 import tests
 
 
-@utilatest.longrun
 def test_footer_regression_common_strategy(td, mp):
-    """There was a bug in handling selective --pages=1 correctly. In the
-    old implementation the page height of page zero was used for the
-    whole document. Therefore selecting page one produces an None access
-    error."""
+    """There was a bug in handling selective --pages=1 correctly.
+
+    In the old implementation the page height of page zero was used for
+    the whole document. Therefore selecting page one produces an None
+    access error.
+    """
     root = td.tmpdir
     source = power.link(power.BACHELOR037_PDF)
     page = 1
-    cmd = f'-i {source} -o {root} --pages={page}'
+    cmd = f'-i {source} -o {root} --pages=0:10'
     tests.run(cmd, mp=mp)
     path = utila.join(root, 'headnote__common_common.yaml')
     headerfooter = serializeraw.load_headerfooter(path)
-    assert len(headerfooter) == 1
+    assert len(headerfooter) == 8
     # Hint: this result is not produced by common strategy
     headerfooter = headerfooter[0]
-    assert headerfooter.header is None
-    assert headerfooter.footer
+    assert headerfooter.header
     assert headerfooter.page == page

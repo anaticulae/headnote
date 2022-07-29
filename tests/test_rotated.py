@@ -8,6 +8,7 @@
 # =============================================================================
 
 import power
+import pytest
 import serializeraw
 import utila
 import utilatest
@@ -15,6 +16,7 @@ import utilatest
 import tests
 
 
+@pytest.mark.xfail(reason='invalid bounding_mean header font')
 def test_footer_rotated_master116page102_108(td, mp):
     utilatest.fixture_requires(power.MASTER116_PDF)
     source = power.link(power.MASTER116_PDF)
@@ -23,7 +25,7 @@ def test_footer_rotated_master116page102_108(td, mp):
         f'-i {source} -o {td.tmpdir} --pages {pages}',
         mp=mp,
     )
-    path = td.tmpdir.join('headnote__common_common.yaml')
+    path = td.tmpdir.join('headnote__result_result.yaml')
     footerheader = serializeraw.load_headerfooter(path)
     header = [item.header for item in footerheader]
     assert len(header) == 7
