@@ -10,6 +10,9 @@
 import utila
 
 
-def work(xcommon: str) -> str:
+def work(
+    xcommon: str,
+    xfixed: str,
+) -> str:
     result = utila.file_read(xcommon)
     return result

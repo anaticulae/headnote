@@ -19,16 +19,24 @@ WORKPLAN = [
         inputs=[
             utila.ResultFile(producer='rawmaker', name='text_text'),
             utila.ResultFile(producer='rawmaker', name='text_positions'),
-            # utila.ResultFile(producer='rawmaker', name='fonts_header'),
-            # utila.ResultFile(producer='rawmaker', name='fonts_content'),
             utila.ResultFile('rawmaker', 'horizontals_horizontals'),
         ],
         output=('common',),
     ),
     utila.create_step(
+        'fixed',
+        inputs=[
+            utila.ResultFile(producer='rawmaker', name='text_text'),
+            utila.ResultFile(producer='rawmaker', name='text_positions'),
+            utila.ResultFile('rawmaker', 'horizontals_horizontals'),
+        ],
+        output=('fixed',),
+    ),
+    utila.create_step(
         'result',
         inputs=[
             utila.ResultFile(producer='headnote', name='common_common'),
+            utila.ResultFile(producer='headnote', name='fixed_fixed'),
         ],
         output=('result',),
     ),
