@@ -7,11 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
-import utilatest
+import utila
 
-import headnote
 
-power.setup(headnote.ROOT)
-
-run, fail = utilatest.create_cli_runner(headnote)
+def work(xcommon: str) -> str:
+    result = utila.file_read(xcommon)
+    return result

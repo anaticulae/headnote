@@ -1,17 +1,19 @@
 # =============================================================================
 # C O P Y R I G H T
 # -----------------------------------------------------------------------------
-# Copyright (c) 2019-2022 by Helmut Konrad Fahrendholz. All rights reserved.
+# Copyright (c) 2022 by Helmut Konrad Fahrendholz. All rights reserved.
 # This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
-import utilatest
+import texmex
 
-import headnote
 
-power.setup(headnote.ROOT)
-
-run, fail = utilatest.create_cli_runner(headnote)
+def rotate_ifrequired(navigators):
+    result = []
+    for ptn in navigators:
+        if ptn.rotated:
+            ptn = texmex.rotate_left(ptn)
+        result.append(ptn)
+    return result
