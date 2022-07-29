@@ -51,6 +51,7 @@ def main():
         config=utila.FeaturePackConfig(
             description=DESCRIPTION,
             name=headnote.PROCESS,
+            multiprocessed=True,
             pages=True,
             version=headnote.__version__,
         ),
