@@ -44,6 +44,10 @@ def work(
         pages=pages,
     )
     ptns = headnote.utils.rotate_ifrequired(ptns)
+    horizontals = headnote.utils.rotate_horizontals_ifrequired(
+        horizontals,
+        ptns,
+    )
     # work
     result = headnote.common.CommonTextStrategy(
         horizontals,
