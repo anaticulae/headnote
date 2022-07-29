@@ -45,6 +45,7 @@ if __name__ == "__main__":
         packages=[
             'headnote',
             'headnote.feature',
+            'headnote.strategy',
         ],
         entry_points={
             'console_scripts': ['headnote = headnote.cli:main'],

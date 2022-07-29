@@ -18,7 +18,7 @@ import collections
 import serializeraw
 import utila
 
-import headnote.common
+import headnote.strategy.common
 import headnote.utils
 
 
@@ -49,7 +49,7 @@ def work(
         ptns,
     )
     # work
-    result = headnote.common.CommonTextStrategy(
+    result = headnote.strategy.common.CommonTextStrategy(
         horizontals,
         ptns,
     ).result()
