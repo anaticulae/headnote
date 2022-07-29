@@ -7,14 +7,14 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-iamraw>=4.80.2<5.0.0
-utila>=2.85.2<3.0.0
+utilatest==0.15.3
 
-configo>=0.20.0<1.0.0
+# reference to test data
+power==2.13.1
+hardcore>=0.5.3<1.0.0
 
-elements>=0.21.4<1.0.0
+# test data generator
+genex==0.33.0
 
-tablero>=0.9.4<1.0.0
-
-# TODO: MOVE TO DEV_REQ LATER
-pagenumber>=0.2.1<1.0.0
+cleanup>=0.3.0<1.0.0
+rawmaker>=2.39.2<3.0.0
