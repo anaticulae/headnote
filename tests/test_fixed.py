@@ -16,22 +16,18 @@ import serializeraw
 import utila
 import utilatest
 
-import headnote.strategy as gfs
-import headnote.strategy.fixed as gfsf
+import headnote.strategy
+import headnote.strategy.fixed
 
 
 def _docu027():
     horizontals = iamraw.path.horizontals(power.link(power.DOCU027_PDF))
     horizontals = serializeraw.load_horizontals(horizontals)
 
-    sizeandborder = iamraw.path.sizeandborder(power.link(power.DOCU027_PDF))
-    sizeandborder = serializeraw.load_pageborders(sizeandborder)
-
-    pageheight = utila.select_page(sizeandborder, 0).size.height
-
     navigators = serializeraw.create_pagetextnavigators_frompath(
         power.link(power.DOCU027_PDF))
-    top, bottom = gfsf.extract_common_footer(
+    pageheight = navigators[0].height
+    top, bottom = headnote.strategy.fixed.extract_common_footer(
         horizontals=horizontals,
         pageheight=pageheight,
     )
@@ -48,7 +44,7 @@ def test_footer_fixed_docu027_extract_common_footer():
 def test_footer_fixed_docu027_extract_page_footerheader():
     horizontals, _, top, bottom, pagetextnavigators = _docu027()
     top, bottom = top[0], bottom[0]
-    extracted = gfsf.extract_page_footerheader(
+    extracted = headnote.strategy.fixed.extract_page_footerheader(
         horizontals,
         top,
         bottom,
@@ -61,19 +57,14 @@ def test_footer_fixed_docu027_extract_page_footerheader():
 
 
 def _bachelor111():
-    horizontals = iamraw.path.horizontals(power.link(power.BACHELOR111_PDF))
+    source = power.link(power.BACHELOR111_PDF)
+    horizontals = iamraw.path.horizontals(source)
     horizontals = serializeraw.load_horizontals(horizontals)
 
-    sizeandborder = iamraw.path.sizeandborder(power.link(power.BACHELOR111_PDF))
-    sizeandborder = serializeraw.load_pageborders(sizeandborder)
-    pageheight = utila.select_page(sizeandborder, 0).size.height
+    navigators = serializeraw.create_pagetextnavigators_frompath(source)
+    pageheight = navigators[0].height
 
-    navigators = serializeraw.create_pagetextnavigators_frompath(
-        power.link(power.BACHELOR111_PDF),
-        prefix='oneline',
-    )
-
-    top, bottom = gfsf.extract_common_footer(
+    top, bottom = headnote.strategy.fixed.extract_common_footer(
         horizontals=horizontals,
         pageheight=pageheight,
     )
@@ -84,14 +75,14 @@ def _bachelor111_footerheader():
     horizontals, _, top, bottom, pagetextnavigators = _bachelor111()
     footerheader = []
     for top, bottom in itertools.zip_longest(top, bottom):
-        extracted = gfsf.extract_page_footerheader(
+        extracted = headnote.strategy.fixed.extract_page_footerheader(
             horizontals,
             top,
             bottom,
             pagetextnavigators,
         )
         footerheader.extend(extracted)
-    footerheader = gfs.remove_duplication(footerheader)
+    footerheader = headnote.strategy.remove_duplication(footerheader)
     return footerheader
 
 
