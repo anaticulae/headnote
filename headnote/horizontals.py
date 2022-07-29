@@ -71,7 +71,6 @@ def biggest_hlinecluster_in_area(
     if not any(valid):
         # no cluster is in range
         return None
-
     # remove clusters with to few elements
     valid = [item for item in valid if len(item) >= min_group_size]
     maximized = headnote.likelihood.select_maxi(

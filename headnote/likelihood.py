@@ -20,40 +20,11 @@ def uniform_result(items):  # pylint:disable=W9012
     Returns:
         collect with relative likelihood of occurrence
     """
-    if isinstance(items, dict):
-        return _uniform_dict(items)
     return _uniform_list(items)
-
-
-def maxi(items):  # pylint:disable=W9012
-    """Determine the maximized likelihood of an uniformed collection
-
-    Args:
-        items(list/dict): data for determining uniformed data
-    Returns:
-        element(s) with maximized likelihood
-    """
-    return _max_mini(items, method=max)
-
-
-def mini(items):  # pylint:disable=W9012
-    """Determine the minimized likelihood of an uniformed collection
-
-    Args:
-        items(list/dict): data for determining uniformed data
-    Returns:
-        element(s) with minimized likelihood
-    """
-    return _max_mini(items, method=min)
 
 
 def select_maxi(items, caller=len, count=1):
     selected = _select(items, decider=max, caller=caller, count=count)
-    return selected
-
-
-def select_mini(items, caller=len, count=1):
-    selected = _select(items, decider=min, caller=caller, count=count)
     return selected
 
 
@@ -96,33 +67,15 @@ def _uniform_list(items):
     return result
 
 
-def _uniform_dict(items: dict) -> dict:
-    values = list(items.values())
-    uniformed = _uniform_list(values)
-    if uniformed is None:
-        return None
-    result = dict(zip(items.keys(), uniformed))
-    return result
-
-
 def _max_mini(items, method=max):
     uniformed = uniform_result(items)
     if uniformed is None:
         return None
-
-    if isinstance(items, dict):
-        finding = method(uniformed.values())
-        selected = {
-            value: occurence
-            for value, occurence in uniformed.items()
-            if occurence == finding
-        }
-    else:
-        finding = method(uniformed)
-        selected = [
-            value for value, occurence in zip(items, uniformed)
-            if occurence == finding
-        ]
+    finding = method(uniformed)
+    selected = [
+        value for value, occurence in zip(items, uniformed)
+        if occurence == finding
+    ]
     if len(selected) == 1 and isinstance(selected, list):
         return selected[0]
     return selected
