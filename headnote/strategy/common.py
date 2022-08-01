@@ -50,9 +50,25 @@ BOTTOM_AREA = configo.HV_PERCENT_PLUS(default=75)
 class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
 
     def result(self):
-        header = self.result_header()
-        footer = self.result_footer()
-        return header
+        headers = self.result_header()
+        footers = self.result_footer()
+        merged = sorted(
+            headers + footers,
+            key=lambda x: x.page,
+        )
+        if not merged:
+            return []
+        result = [merged[0]]
+        for item in merged[1:]:
+            before = result[-1]
+            if item.page == before.page:
+                if item.footer:
+                    before.footer = item.footer
+                if item.header:
+                    before.header = item.header
+            else:
+                result.append(item)
+        return result
 
     def result_header(self):
         headers, clusters = self.determine_header()
