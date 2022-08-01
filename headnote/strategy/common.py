@@ -74,7 +74,11 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         headers, clusters = self.determine_header()
         if not headers:
             return []
-        headers = self.second_try(headers, clusters)
+        headers = self.second_try(
+            headers,
+            clusters,
+            convert=create_fixedheader,
+        )
         result = [
             iamraw.PageContentFooterHeader(
                 header=header,
@@ -89,7 +93,11 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         footers, clusters = self.determine_footer()
         if not footers:
             return []
-        footers = self.second_try(footers, clusters)
+        footers = self.second_try(
+            footers,
+            clusters,
+            convert=create_fixedfooter,
+        )
         result = [
             iamraw.PageContentFooterHeader(
                 header=None,
@@ -104,10 +112,12 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         extracted = cluster_pages(
             self.pagetextnavigators,
             select=potential_header_data,
+            convert=create_fixedheader,
         )
         tryagain = cluster_pages(
             self.pagetextnavigators,
             select=potential_header_data,
+            convert=create_fixedheader,
             tryagain=True,
         )
         clusters = None
@@ -129,10 +139,12 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         extracted = cluster_pages(
             self.pagetextnavigators,
             select=potential_footer_data,
+            convert=create_fixedfooter,
         )
         tryagain = cluster_pages(
             self.pagetextnavigators,
             select=potential_footer_data,
+            convert=create_fixedfooter,
             tryagain=True,
         )
         clusters = None
@@ -150,13 +162,13 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
                 clusters = None
         return headers, clusters
 
-    def second_try(self, headers, clusters):
+    def second_try(self, headers, clusters, convert):
         # do not revisit pages with already detected header
         skip = {item[0] for item in headers}
         ptns_left = [
             page for page in self.pagetextnavigators if page.page not in skip
         ]
-        result = more_magic(ptns_left, clusters)
+        result = more_magic(ptns_left, clusters, convert=convert)
         return result
 
     def verify_result(self, headers):
@@ -228,6 +240,7 @@ HEADER_TOL = configo.HV_FLOAT_PLUS(default=0.01)
 def cluster_pages(
     pagenavigators: texmex.PageTextNavigators,
     select: callable,
+    convert: callable,
     tryagain: bool = False,
 ):
     occurrence_min = HEADER_TEXT_OCCURENCE_MIN
@@ -253,18 +266,24 @@ def cluster_pages(
     )
     if not clusters:
         return None
-    result = convert_cluster(clusters)
+    result = convert_cluster(
+        clusters,
+        convert=convert,
+    )
     return result, clusters
 
 
-def convert_cluster(clusters) -> list:
+def convert_cluster(
+    clusters,
+    convert: callable,
+) -> list:
     grouped = {}
     for cluster in clusters:
         for bounding, text, pageheight, pagenumber in cluster:
             end = bounding.y1 / pageheight
             end = utila.roundme(HEADER_TOL + end)
             current = grouped.get(pagenumber, None)
-            current = create_fixedheader(current, text.text, pagenumber, end)
+            current = convert(current, text.text, pagenumber, end)
             grouped[pagenumber] = current
     result = list(grouped.items())
     # sort FixedHeaderInformation by page
@@ -284,6 +303,32 @@ def create_fixedheader(
         current = iamraw.FixedHeaderInformation(
             begin=texmex.START,
             end=end,
+            page=iamraw.PageInformation(value=pagenumber, raw=None),
+        )
+    title = headnote.headnotes.parse_title(text)
+    if title:
+        current.title = title
+        return current
+    parsed = headnote.headnotes.parse_pagenumber(text)
+    if parsed:
+        current.page = parsed
+        return current
+    current.undefined.append(iamraw.RawText(text=text.strip()))
+    return current
+
+
+def create_fixedfooter(
+    current,
+    text: str,
+    pagenumber,
+    begin,
+) -> iamraw.FixedHeaderInformation:
+    # remove newline at end TODO: REMOVE LATER
+    text = text.strip()
+    if current is None:
+        current = iamraw.FixedHeaderInformation(
+            begin=begin,
+            end=texmex.END,
             page=iamraw.PageInformation(value=pagenumber, raw=None),
         )
     title = headnote.headnotes.parse_title(text)
@@ -398,7 +443,7 @@ def header_content(pagecontents, occurrence_min: int) -> set:
     return valid
 
 
-def more_magic(ptns, clusters):
+def more_magic(ptns, clusters, convert: callable):
     """Revisit pages without detected header and try to match header
     items with already detected areas."""
     valid = utila.flatten([list(cluster) for cluster in clusters])
@@ -409,7 +454,10 @@ def more_magic(ptns, clusters):
             if not any((matches(val, item) for val in valid)):
                 continue
             result.append(item)
-    result = convert_cluster([result] + [valid])
+    result = convert_cluster(
+        [result] + [valid],
+        convert=convert,
+    )
     return result
 
 
