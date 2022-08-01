@@ -170,16 +170,16 @@ def extract_page_footerheader(
         textnavigator = utila.select_page(pagetextnavigators, page.page)
         header = None
         if top is not None and headnote.horizontals.match(
-                page.content,
-                top,
-                HORIZONTALS_MATCH_DIFF_MAX,
+                content=page.content,
+                expected=top,
+                diff_max=HORIZONTALS_MATCH_DIFF_MAX,
         ):
             header = create_header(top / textnavigator.height, textnavigator)
         footer = None
         if bottom is not None and headnote.horizontals.match(
-                page.content,
-                bottom,
-                HORIZONTALS_MATCH_DIFF_MAX,
+                content=page.content,
+                expected=bottom,
+                diff_max=HORIZONTALS_MATCH_DIFF_MAX,
         ):
             footer = iamraw.FixedFooterInformation(
                 begin=utila.roundme(bottom / textnavigator.height),
