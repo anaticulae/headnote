@@ -48,6 +48,10 @@ TOP_AREA = configo.HV_PERCENT_PLUS(default=15)
 class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
 
     def result(self):
+        header = self.result_header()
+        return header
+
+    def result_header(self):
         headers, clusters = self.determine_header()
         if not headers:
             return []
