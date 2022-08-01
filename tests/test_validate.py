@@ -61,7 +61,7 @@ class Evaluate(utilatest.BaseLiner):
         for item in value:
             if rendered := rawline(item.page, item.header):
                 headers.append(rendered)
-            if rendered := footerline(item.page, item.footer):
+            if rendered := rawline(item.page, item.footer):
                 headers.append(rendered)
         # remove empty items
         headers = [item for item in headers if item]
@@ -80,11 +80,4 @@ def rawline(pdfpage, header) -> str:
     undefined = ' '.join(item.text for item in header.undefined)
     if undefined:
         result += undefined
-    return result
-
-
-def footerline(pdfpage, footer) -> str:
-    if not footer:
-        return ''
-    result = str(pdfpage).zfill(4) + ' ' + 'Fixed Footer'
     return result

@@ -173,7 +173,7 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
 
     def verify_result(self, headers):
         pagecount = len(self.pagetextnavigators)
-        headercount = len([item.header for item in headers])
+        headercount = len([it for it in headers if it.header or it.footer])
         required = HEADER_OCCURRENCE_MIN(pagecount)
         if headercount < required:
             utila.debug(f'disable header common too few header: {headercount} '
@@ -326,7 +326,7 @@ def create_fixedfooter(
     # remove newline at end TODO: REMOVE LATER
     text = text.strip()
     if current is None:
-        current = iamraw.FixedHeaderInformation(
+        current = iamraw.FixedFooterInformation(
             begin=begin,
             end=texmex.END,
             page=iamraw.PageInformation(value=pagenumber, raw=None),

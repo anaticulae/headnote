@@ -181,9 +181,9 @@ def extract_page_footerheader(
                 expected=bottom,
                 diff_max=HORIZONTALS_MATCH_DIFF_MAX,
         ):
-            footer = iamraw.FixedFooterInformation(
-                begin=utila.roundme(bottom / textnavigator.height),
-                end=texmex.END,
+            footer = create_footer(
+                bottom=utila.roundme(bottom / textnavigator.height),
+                navigator=textnavigator,
             )
         if header is None and footer is None:
             # no matching horizontals
@@ -199,6 +199,8 @@ def extract_page_footerheader(
 
 # 10% percent cause of bad font-bounding-boxing
 HEADER_PARSING_TOL = configo.HV_PERCENT_PLUS(default=10, limit=25)
+# TODO: PRECENT_MINUS
+FOOTER_PARSING_TOL = configo.HV_PERCENT_PLUS(default=0, limit=25)
 
 
 def create_header(top: float, navigator):
@@ -209,6 +211,24 @@ def create_header(top: float, navigator):
     )
     parsed = headnote.headnotes.parse(headercontent)
     result = iamraw.FixedHeaderInformation(begin=texmex.START, end=top)
+    for item in parsed:
+        if isinstance(item, iamraw.HeaderTitle):
+            result.title = item
+        if isinstance(item, iamraw.RawText):
+            result.undefined.append(item)
+        if isinstance(item, iamraw.PageInformation):
+            result.page = item
+    return result
+
+
+def create_footer(bottom: float, navigator):
+    bottom = utila.roundme(bottom * (1 + FOOTER_PARSING_TOL))
+    headercontent = navigator.between(
+        bottom,
+        texmex.END,
+    )
+    parsed = headnote.headnotes.parse(headercontent)
+    result = iamraw.FixedFooterInformation(begin=bottom, end=texmex.END)
     for item in parsed:
         if isinstance(item, iamraw.HeaderTitle):
             result.title = item
