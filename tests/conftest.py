@@ -66,6 +66,7 @@ def extract(resources):
         cleanup=True,
         oneline=None,
         pagenumber=True,
+        footnote=True,
         rawmaker=RAWMAKER,
         worker=WORKER,
     )
