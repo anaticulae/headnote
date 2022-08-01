@@ -63,8 +63,15 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         return result
 
     def determine_header(self):
-        extracted = cluster_pages(self.pagetextnavigators)
-        tryagain = cluster_pages(self.pagetextnavigators, tryagain=True)
+        extracted = cluster_pages(
+            self.pagetextnavigators,
+            select=potential_header_data,
+        )
+        tryagain = cluster_pages(
+            self.pagetextnavigators,
+            select=potential_header_data,
+            tryagain=True,
+        )
         clusters = None
         if extracted:
             headers = best(extracted[0], tryagain[0])
@@ -157,6 +164,7 @@ HEADER_TOL = configo.HV_FLOAT_PLUS(default=0.01)
 
 def cluster_pages(
     pagenavigators: texmex.PageTextNavigators,
+    select: callable,
     tryagain: bool = False,
 ):
     occurrence_min = HEADER_TEXT_OCCURENCE_MIN
@@ -168,6 +176,7 @@ def cluster_pages(
     with_box = utila.flatten(
         prepare_clustering(
             pagenavigators,
+            select=select,
             occurrence_min=occurrence_min,
         ))
     page_count = len(pagenavigators)
@@ -233,9 +242,10 @@ HEADER_TEXT_OCCURENCE_TRYAGAIN_MIN = configo.HV_INT_PLUS(default=3)
 
 def prepare_clustering(
     pagetextnavigators,
+    select: callable,
     occurrence_min: int = HEADER_TEXT_OCCURENCE_MIN,
 ):
-    collected = potential_header_data(pagetextnavigators)
+    collected = select(pagetextnavigators)
     valid = header_content(collected, occurrence_min=occurrence_min)
     result = []
     for page in collected:
