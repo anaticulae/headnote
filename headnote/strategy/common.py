@@ -44,11 +44,14 @@ OCCURRENCE_MIN = configo.HolyTable(
 
 TOP_AREA = configo.HV_PERCENT_PLUS(default=15)
 
+BOTTOM_AREA = configo.HV_PERCENT_PLUS(default=75)
+
 
 class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
 
     def result(self):
         header = self.result_header()
+        footer = self.result_footer()
         return header
 
     def result_header(self):
@@ -66,6 +69,21 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         result = self.verify_result(result)
         return result
 
+    def result_footer(self):
+        footers, clusters = self.determine_footer()
+        if not footers:
+            return []
+        footers = self.second_try(footers, clusters)
+        result = [
+            iamraw.PageContentFooterHeader(
+                header=None,
+                footer=footer,
+                page=page,
+            ) for (page, footer) in footers
+        ]
+        result = self.verify_result(result)
+        return result
+
     def determine_header(self):
         extracted = cluster_pages(
             self.pagetextnavigators,
@@ -74,6 +92,31 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         tryagain = cluster_pages(
             self.pagetextnavigators,
             select=potential_header_data,
+            tryagain=True,
+        )
+        clusters = None
+        if extracted:
+            headers = best(extracted[0], tryagain[0])
+            if headers == extracted[0]:
+                clusters = extracted[1]
+            else:
+                clusters = tryagain[1]
+        else:
+            headers = tryagain[0] if tryagain else []
+            if tryagain:
+                clusters = tryagain[1]
+            else:
+                clusters = None
+        return headers, clusters
+
+    def determine_footer(self):
+        extracted = cluster_pages(
+            self.pagetextnavigators,
+            select=potential_footer_data,
+        )
+        tryagain = cluster_pages(
+            self.pagetextnavigators,
+            select=potential_footer_data,
             tryagain=True,
         )
         clusters = None
@@ -282,6 +325,19 @@ def potential_header_data(ptns):
             page.height,
             page.page,
         ) for item in page.before(TOP_AREA) if not noheader_content(item)]
+        collected.append(content)
+    return collected
+
+
+def potential_footer_data(ptns):
+    collected = []
+    for page in ptns:
+        content = [(
+            item.bounding,
+            item,
+            page.height,
+            page.page,
+        ) for item in page.after(BOTTOM_AREA) if not noheader_content(item)]
         collected.append(content)
     return collected
 
