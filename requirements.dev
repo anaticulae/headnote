@@ -16,7 +16,7 @@ hardcore>=0.5.3<1.0.0
 # test data generator
 genex==0.34.0
 
-cleanup>=0.4.2<1.0.0
+cleanup>=0.5.0<1.0.0
 rawmaker>=2.39.3<3.0.0
 pdfinfo>=0.1.2<1.0.0
 
