@@ -8,7 +8,6 @@
 # =============================================================================
 
 import power
-import pytest
 import serializeraw
 import utila
 import utilatest
@@ -16,7 +15,6 @@ import utilatest
 import tests
 
 
-@pytest.mark.xfail(reason='invalid bounding_mean header font')
 def test_footer_rotated_master116page102_108(td, mp):
     utilatest.fixture_requires(power.MASTER116_PDF)
     source = power.link(power.MASTER116_PDF)
