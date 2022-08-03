@@ -313,7 +313,7 @@ def create_fixedheader(
     if parsed:
         current.page = parsed
         return current
-    current.undefined.append(iamraw.RawText(text=text.strip()))
+    current.undefined.append(iamraw.RawText(text=text))
     return current
 
 
@@ -339,7 +339,7 @@ def create_fixedfooter(
     if parsed:
         current.page = parsed
         return current
-    current.undefined.append(iamraw.RawText(text=text.strip()))
+    current.undefined.append(iamraw.RawText(text=text))
     return current
 
 
