@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v0.2.1
+
+### Feature
+
+* cache result (bd13342feb64)
+
+### Documentation
+
+* extend interface documentation (9a4bb0ceea4a)
+
 ## v0.2.0
 
 ### Feature
