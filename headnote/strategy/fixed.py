@@ -174,7 +174,10 @@ def extract_page_footerheader(
                 expected=top,
                 diff_max=HORIZONTALS_MATCH_DIFF_MAX,
         ):
-            header = create_header(top / textnavigator.height, textnavigator)
+            header = create_header(
+                top=utila.roundme(top / textnavigator.height),
+                navigator=textnavigator,
+            )
         footer = None
         if bottom is not None and headnote.horizontals.match(
                 content=page.content,
