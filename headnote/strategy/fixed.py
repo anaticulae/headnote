@@ -174,8 +174,10 @@ def extract_page_footerheader(
                 expected=top,
                 diff_max=HORIZONTALS_MATCH_DIFF_MAX,
         ):
-            header = create_header(
-                top=utila.roundme(top / textnavigator.height),
+            header = create_info_area(
+                top=texmex.START,
+                bottom=utila.roundme(top / textnavigator.height *
+                                     (1 + HEADER_PARSING_TOL)),
                 navigator=textnavigator,
             )
         footer = None
@@ -184,9 +186,12 @@ def extract_page_footerheader(
                 expected=bottom,
                 diff_max=HORIZONTALS_MATCH_DIFF_MAX,
         ):
-            footer = create_footer(
-                bottom=utila.roundme(bottom / textnavigator.height),
+            footer = create_info_area(
+                top=utila.roundme(bottom / textnavigator.height *
+                                  (1 + FOOTER_PARSING_TOL)),
+                bottom=texmex.END,
                 navigator=textnavigator,
+                ctor=iamraw.FixedFooterInformation,
             )
         if header is None and footer is None:
             # no matching horizontals
@@ -206,32 +211,15 @@ HEADER_PARSING_TOL = configo.HV_PERCENT_PLUS(default=10, limit=25)
 FOOTER_PARSING_TOL = configo.HV_PERCENT_PLUS(default=0, limit=25)
 
 
-def create_header(top: float, navigator):
-    top = utila.roundme(top * (1 + HEADER_PARSING_TOL))
-    headercontent = navigator.between(
-        texmex.START,
-        top,
-    )
-    parsed = headnote.headnotes.parse(headercontent)
-    result = iamraw.FixedHeaderInformation(begin=texmex.START, end=top)
-    for item in parsed:
-        if isinstance(item, iamraw.HeaderTitle):
-            result.title = item
-        if isinstance(item, iamraw.RawText):
-            result.undefined.append(item)
-        if isinstance(item, iamraw.PageInformation):
-            result.page = item
-    return result
-
-
-def create_footer(bottom: float, navigator):
-    bottom = utila.roundme(bottom * (1 + FOOTER_PARSING_TOL))
-    headercontent = navigator.between(
-        bottom,
-        texmex.END,
-    )
-    parsed = headnote.headnotes.parse(headercontent)
-    result = iamraw.FixedFooterInformation(begin=bottom, end=texmex.END)
+def create_info_area(
+    navigator,
+    top: float,
+    bottom: float,
+    ctor=iamraw.FixedHeaderInformation,
+):
+    content = navigator.between(top, bottom)
+    parsed = headnote.headnotes.parse(content)
+    result = ctor(begin=texmex.START, end=top)
     for item in parsed:
         if isinstance(item, iamraw.HeaderTitle):
             result.title = item
