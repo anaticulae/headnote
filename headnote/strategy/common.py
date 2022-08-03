@@ -42,9 +42,9 @@ OCCURRENCE_MIN = configo.HolyTable(
     right_outranges_none=False,
 )
 
-TOP_AREA = configo.HV_PERCENT_PLUS(default=15)
+AREA_TOP = configo.HV_PERCENT_PLUS(default=15)
 
-BOTTOM_AREA = configo.HV_PERCENT_PLUS(default=75)
+AREA_BOTTOM = configo.HV_PERCENT_PLUS(default=75)
 
 
 class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
@@ -385,7 +385,7 @@ def potential_header_data(ptns):
             item,
             page.height,
             page.page,
-        ) for item in page.before(TOP_AREA) if not noheader_content(item)]
+        ) for item in page.before(AREA_TOP) if not noheader_content(item)]
         collected.append(content)
     return collected
 
@@ -398,7 +398,7 @@ def potential_footer_data(ptns):
             item,
             page.height,
             page.page,
-        ) for item in page.after(BOTTOM_AREA) if not noheader_content(item)]
+        ) for item in page.after(AREA_BOTTOM) if not noheader_content(item)]
         collected.append(content)
     return collected
 
