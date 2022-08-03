@@ -27,7 +27,7 @@ def extract_header(source, td, mp, pages=':'):
 
 
 def test_bachelor90(td, mp):
-    header = extract_header(power.BACHELOR090_PDF, td, mp, '11:24') # yapf:disable
+    header = extract_header(power.BACHELOR090_PDF, td, mp, '11:24')
     assert len(header) == 11
 
 
@@ -71,7 +71,6 @@ def test_under_line_master75(td, mp):
     """Ensure to parse header of alternating pages correctly."""
     loaded = extract_header(power.MASTER075_PDF, td, mp, '0:50')
     assert len(loaded) == 48, len(loaded)
-
     # TODO: MAY ENABLE LATER
     # first = loaded[0].header.undefined
     # use common extractor

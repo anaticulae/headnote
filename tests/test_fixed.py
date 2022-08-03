@@ -21,9 +21,10 @@ import headnote.strategy.fixed
 
 
 def _docu027():
-    horizontals = iamraw.path.horizontals(power.link(power.DOCU027_PDF))
+    source = power.link(power.DOCU027_PDF)
+    horizontals = iamraw.path.horizontals(source)
     horizontals = serializeraw.load_horizontals(horizontals)
-    navigators = serializeraw.ptn_frompath(power.link(power.DOCU027_PDF))
+    navigators = serializeraw.ptn_frompath(source)
     pageheight = navigators[0].height
     top, bottom = headnote.strategy.fixed.extract_common_footer(
         horizontals=horizontals,
@@ -32,14 +33,14 @@ def _docu027():
     return horizontals, pageheight, top, bottom, navigators
 
 
-def test_footer_fixed_docu027_extract_common_footer():
+def test_docu027_extract_common_footer():
     _, __, top, bottom, ___ = _docu027()
     assert top  # document has header
     assert bottom  # document has footer
     assert top < bottom
 
 
-def test_footer_fixed_docu027_extract_page_footerheader():
+def test_docu027_extract_page_footerheader():
     horizontals, _, top, bottom, ptns = _docu027()
     top, bottom = top[0], bottom[0]
     extracted = headnote.strategy.fixed.extract_page_footerheader(
@@ -58,10 +59,8 @@ def _bachelor111():
     source = power.link(power.BACHELOR111_PDF)
     horizontals = iamraw.path.horizontals(source)
     horizontals = serializeraw.load_horizontals(horizontals)
-
     navigators = serializeraw.ptn_frompath(source)
     pageheight = navigators[0].height
-
     top, bottom = headnote.strategy.fixed.extract_common_footer(
         horizontals=horizontals,
         pageheight=pageheight,
@@ -85,7 +84,7 @@ def _bachelor111_footerheader():
 
 
 @utilatest.longrun
-def test_footer_fixed_bachelor111page_extract_common_footer():
+def test_bachelor111page_extract_common_footer():
     _, __, top, bottom, ___ = _bachelor111()
     assert top  # document has header
     assert bottom  # document has footer
@@ -93,10 +92,11 @@ def test_footer_fixed_bachelor111page_extract_common_footer():
 
 
 @utilatest.longrun
-def test_footer_fixed_bachelor111page_extract_page_footerheader():
-    """Use more than one group to detect all headers. There are ordered
-    from biggest to smallest"""
+def test_bachelor111page_extract_page_footerheader():
+    """Use more than one group to detect all headers.
 
+    There are ordered from biggest to smallest.
+    """
     footerheader = _bachelor111_footerheader()
     msg = 'more footer than pages, remove duplication'
     bachelor111pagecount = 111
@@ -111,7 +111,7 @@ def test_footer_fixed_bachelor111page_extract_page_footerheader():
 
 
 @utilatest.longrun
-def test_footer_fixed_bachelor111page_extract_page_header():
+def test_bachelor111page_extract_page_header():
     footerheader = _bachelor111_footerheader()
     pages = [item.page for item in footerheader]
     assert all(pages)
