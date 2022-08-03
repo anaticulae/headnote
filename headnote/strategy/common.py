@@ -405,7 +405,7 @@ def potential_footer_data(ptns):
 HEADER_TEXT_SIZE_MAX = configo.HV_FLOAT_PLUS(default=13.9)
 
 
-def noheader_content(item):
+def noheader_content(item) -> bool:
     if item.bounding_mean > HEADER_TEXT_SIZE_MAX:
         return True
     text = item.text.strip()
