@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v0.2.0
+
+### Feature
+
+* use improved footer data type (668296676c2e)
+* add missing common footer behavior (78a34cec913a)
+* merge footer and header into a single result (39c71060f825)
+* add footer detector (96e62b10d5ab)
+* prepare common to detect footer (bc0b37630b5a)
+
 ## v0.1.1
 
 ### Feature
