@@ -363,7 +363,8 @@ def prepare_clustering(
 def valid_line(text: str, valid: set) -> bool:
     """Remove small text token trash.
 
-    >>> assert not valid_line('-', valid={'-'})
+    Skip very short elements:
+    >>> assert not valid_line('-', valid={})
     """
     text = text.strip()
     if elements.ispagenumber(text):
