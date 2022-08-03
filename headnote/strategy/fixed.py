@@ -64,12 +64,12 @@ class FixedHeadnoteStrategy(headnote.strategy.HeadnoteDetectionStrategy):
     """
 
     def result(self):
-        if not self.pagetextnavigators:
+        if not self.ptns:
             return []
         # TODO: HOW TO HANDLE DIFFERENT PAGE HEIGHTS
         # TODO: GROUP PAGE BY PAGESIZE FIRST AND THEN COMPUTE FOR EVERY
         # DIFFERENT PAGE SIZE
-        first_page = self.pagetextnavigators[0].page
+        first_page = self.ptns[0].page
         pageheight = self.pageheight(first_page)
         # determine most common border for all pages
         tops, bottoms = extract_common_footer(
@@ -84,7 +84,7 @@ class FixedHeadnoteStrategy(headnote.strategy.HeadnoteDetectionStrategy):
                 horizontals=self.horizontals,
                 top=top,
                 bottom=bottom,
-                pagetextnavigators=self.pagetextnavigators,
+                ptns=self.ptns,
             )
             footerheader.extend(extracted)
         footerheader = decide_multiple(footerheader)
@@ -152,7 +152,7 @@ def extract_page_footerheader(
     horizontals: iamraw.PagesWithHorizontalList,
     top: float,
     bottom: float,
-    pagetextnavigators: texmex.PageTextNavigators,
+    ptns: texmex.PTNs,
 ) -> iamraw.PageContentFooterHeaders:
     """Extract footer and header which matches `top` and `bottom`.
 
@@ -160,14 +160,14 @@ def extract_page_footerheader(
         horizontals: pages with horizontal lines
         top(pixel): position of header-border horizontal line
         bottom(pixel): position of footer-border horizontal line
-        pagetextnavigators: list of page content
+        ptns: list of page content
     Returns:
         list of `iamraw.PageContentFooterHeader` for every
         page with header and footer information.
     """
     result = []
     for page in horizontals:
-        textnavigator = utila.select_page(pagetextnavigators, page.page)
+        textnavigator = utila.select_page(ptns, page.page)
         header = None
         if top is not None and headnote.horizontals.match(
                 content=page.content,

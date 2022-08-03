@@ -23,9 +23,7 @@ import headnote.strategy.fixed
 def _docu027():
     horizontals = iamraw.path.horizontals(power.link(power.DOCU027_PDF))
     horizontals = serializeraw.load_horizontals(horizontals)
-
-    navigators = serializeraw.create_pagetextnavigators_frompath(
-        power.link(power.DOCU027_PDF))
+    navigators = serializeraw.ptn_frompath(power.link(power.DOCU027_PDF))
     pageheight = navigators[0].height
     top, bottom = headnote.strategy.fixed.extract_common_footer(
         horizontals=horizontals,
@@ -42,13 +40,13 @@ def test_footer_fixed_docu027_extract_common_footer():
 
 
 def test_footer_fixed_docu027_extract_page_footerheader():
-    horizontals, _, top, bottom, pagetextnavigators = _docu027()
+    horizontals, _, top, bottom, ptns = _docu027()
     top, bottom = top[0], bottom[0]
     extracted = headnote.strategy.fixed.extract_page_footerheader(
         horizontals,
         top,
         bottom,
-        pagetextnavigators,
+        ptns,
     )
     allfooter = [
         item.footer is not None for item in extracted if item.page >= 2
@@ -61,7 +59,7 @@ def _bachelor111():
     horizontals = iamraw.path.horizontals(source)
     horizontals = serializeraw.load_horizontals(horizontals)
 
-    navigators = serializeraw.create_pagetextnavigators_frompath(source)
+    navigators = serializeraw.ptn_frompath(source)
     pageheight = navigators[0].height
 
     top, bottom = headnote.strategy.fixed.extract_common_footer(
@@ -72,14 +70,14 @@ def _bachelor111():
 
 
 def _bachelor111_footerheader():
-    horizontals, _, top, bottom, pagetextnavigators = _bachelor111()
+    horizontals, _, top, bottom, ptns = _bachelor111()
     footerheader = []
     for top, bottom in itertools.zip_longest(top, bottom):
         extracted = headnote.strategy.fixed.extract_page_footerheader(
             horizontals,
             top,
             bottom,
-            pagetextnavigators,
+            ptns,
         )
         footerheader.extend(extracted)
     footerheader = headnote.strategy.remove_duplication(footerheader)

@@ -35,11 +35,11 @@ class HeadnoteDetectionStrategy(abc.ABC):
     def __init__(
         self,
         horizontals: iamraw.PagesWithHorizontalList,
-        pagetextnavigators: texmex.PageTextNavigators,
+        ptns: texmex.PTNs,
     ):
         assert isinstance(horizontals, typing.List), str(horizontals)
         self.horizontals = horizontals
-        self.pagetextnavigators = pagetextnavigators
+        self.ptns = ptns
 
         self.result__ = {}
 
@@ -66,7 +66,7 @@ class HeadnoteDetectionStrategy(abc.ABC):
             pageheight if pageheight exists
             None if pageheight not exists
         """
-        selected = utila.select_page(self.pagetextnavigators, page)
+        selected = utila.select_page(self.ptns, page)
         if selected is None:
             return None
         pageheight = selected.height

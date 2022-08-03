@@ -110,12 +110,12 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
 
     def determine_header(self):
         extracted = cluster_pages(
-            self.pagetextnavigators,
+            self.ptns,
             select=potential_header_data,
             convert=create_fixedheader,
         )
         tryagain = cluster_pages(
-            self.pagetextnavigators,
+            self.ptns,
             select=potential_header_data,
             convert=create_fixedheader,
             tryagain=True,
@@ -137,12 +137,12 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
 
     def determine_footer(self):
         extracted = cluster_pages(
-            self.pagetextnavigators,
+            self.ptns,
             select=potential_footer_data,
             convert=create_fixedfooter,
         )
         tryagain = cluster_pages(
-            self.pagetextnavigators,
+            self.ptns,
             select=potential_footer_data,
             convert=create_fixedfooter,
             tryagain=True,
@@ -165,14 +165,12 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
     def second_try(self, headers, clusters, convert):
         # do not revisit pages with already detected header
         skip = {item[0] for item in headers}
-        ptns_left = [
-            page for page in self.pagetextnavigators if page.page not in skip
-        ]
+        ptns_left = [page for page in self.ptns if page.page not in skip]
         result = more_magic(ptns_left, clusters, convert=convert)
         return result
 
     def verify_result(self, headers):
-        pagecount = len(self.pagetextnavigators)
+        pagecount = len(self.ptns)
         headercount = len([it for it in headers if it.header or it.footer])
         required = HEADER_OCCURRENCE_MIN(pagecount)
         if headercount < required:
@@ -238,7 +236,7 @@ HEADER_TOL = configo.HV_FLOAT_PLUS(default=0.01)
 
 
 def cluster_pages(
-    pagenavigators: texmex.PageTextNavigators,
+    ptns: texmex.PTNs,
     select: callable,
     convert: callable,
     tryagain: bool = False,
@@ -251,11 +249,11 @@ def cluster_pages(
     # prepare data
     with_box = utila.flatten(
         prepare_clustering(
-            pagenavigators,
+            ptns,
             select=select,
             occurrence_min=occurrence_min,
         ))
-    page_count = len(pagenavigators)
+    page_count = len(ptns)
     cluster_length_min = OCCURRENCE_MIN(page_count)
     # TODO: REMOVE LATER, SWITCH TABLE BASED ENTROPY OF POTENTIAL HEADER AREA?
     cluster_length_min = 5
@@ -349,11 +347,11 @@ HEADER_TEXT_OCCURENCE_TRYAGAIN_MIN = configo.HV_INT_PLUS(default=3)
 
 
 def prepare_clustering(
-    pagetextnavigators,
+    ptns,
     select: callable,
     occurrence_min: int = HEADER_TEXT_OCCURENCE_MIN,
 ):
-    collected = select(pagetextnavigators)
+    collected = select(ptns)
     valid = header_content(collected, occurrence_min=occurrence_min)
     result = []
     for page in collected:
