@@ -368,6 +368,7 @@ def valid_line(text: str, valid: set) -> bool:
     """
     text = text.strip()
     if elements.ispagenumber(text):
+        # TODO: ALREADY REMOVED IN PAGENUMBER APPLICATION
         return True
     if len(text) <= 3:
         return False
