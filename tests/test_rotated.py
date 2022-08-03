@@ -7,6 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import iamraw
 import power
 import serializeraw
 import utila
@@ -23,7 +24,7 @@ def test_footer_rotated_master116page102_108(td, mp):
         f'-i {source} -o {td.tmpdir} --pages {pages}',
         mp=mp,
     )
-    path = td.tmpdir.join('headnote__result_result.yaml')
+    path = iamraw.path.headnote_result(td.tmpdir)
     footerheader = serializeraw.load_headerfooter(path)
     header = [item.header for item in footerheader]
     assert len(header) == 7

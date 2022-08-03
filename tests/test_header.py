@@ -7,10 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import iamraw
 import power
 import pytest
 import serializeraw
-import utila
 import utilatest
 
 import tests
@@ -20,7 +20,7 @@ def extract_header(source, td, mp, pages=':'):
     utilatest.fixture_requires(source)
     cmd = f'-i {power.link(source)} --pages={pages}'
     tests.run(cmd, mp=mp)
-    headerpath = utila.join(td.tmpdir.join('headnote__result_result.yaml'))
+    headerpath = iamraw.path.headnote_result(td.tmpdir)
     loaded = serializeraw.load_headerfooter(headerpath)
     header = [item.header for item in loaded if item.header]
     return header

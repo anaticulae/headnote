@@ -9,6 +9,7 @@
 
 import functools
 
+import iamraw
 import power
 import pytest
 import serializeraw
@@ -49,11 +50,8 @@ class Evaluate(utilatest.BaseLiner):
         )
 
     def load_footnotes(self, _):  # pylint:disable=W0613
-        loaded = serializeraw.load_headerfooter(
-            utila.join(
-                self.workdir,
-                'headnote__result_result.yaml',
-            ))
+        path = iamraw.path.headnote_result(self.workdir)
+        loaded = serializeraw.load_headerfooter(path)
         return loaded
 
     def raw(self, value) -> str:
