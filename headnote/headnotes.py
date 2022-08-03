@@ -34,12 +34,14 @@ def parse(content: str):
     return result
 
 
+@utila.cacheme
 def parse_rawtext(text: str):
     if text.count(utila.NEWLINE) <= 2:
         return None
     return iamraw.RawText(text=text.strip())
 
 
+@utila.cacheme
 def parse_pagenumber(text: str):
     text = text.strip()
     if not elements.ispagenumber(text):
@@ -47,6 +49,7 @@ def parse_pagenumber(text: str):
     return iamraw.PageInformation(value=text, raw=text)
 
 
+@utila.cacheme
 def parse_title(text: str) -> iamraw.HeaderTitle:
     regex = parse_title_regex(text)
     if regex:
