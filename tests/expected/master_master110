@@ -1,73 +1,146 @@
 0019 KAPITEL 1. EINLEITUNG
+0019 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0020 1.3. WISSENSCHAFTLICHER BEITRAG
+0020 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0023 KAPITEL 2. STAND DER TECHNIK
+0023 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0024 2.2. OBJEKTERKENNUNG
+0024 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0025 KAPITEL 2. STAND DER TECHNIK
+0025 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0026 2.2. OBJEKTERKENNUNG
+0026 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0029 KAPITEL 3. TIEFENBILDER
+0029 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0030 3.2. EIGENSCHAFTEN VON TIEFENBILDERN
+0030 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0033 KAPITEL 4. KONTUREXTRAKTION
+0033 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0034 4.1. BILDVORVERARBEITUNG
+0034 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0035 KAPITEL 4. KONTUREXTRAKTION
+0035 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0036 4.1. BILDVORVERARBEITUNG
+0036 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0037 KAPITEL 4. KONTUREXTRAKTION
+0037 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0038 4.1. BILDVORVERARBEITUNG
+0038 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0039 KAPITEL 4. KONTUREXTRAKTION
+0039 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0040 4.2. SEGMENTIERUNGSVERFAHREN
+0040 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0041 KAPITEL 4. KONTUREXTRAKTION
+0041 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0042 4.2. SEGMENTIERUNGSVERFAHREN
+0042 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0043 KAPITEL 4. KONTUREXTRAKTION
+0043 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0044 4.2. SEGMENTIERUNGSVERFAHREN
+0044 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0045 KAPITEL 4. KONTUREXTRAKTION
+0045 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0046 4.3. KONTUREXTRAKTION
+0046 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0047 KAPITEL 4. KONTUREXTRAKTION
+0047 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0048 4.4. VERBESSERUNGEN AM EINGABEBILD
+0048 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0049 KAPITEL 4. KONTUREXTRAKTION
+0049 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0050 4.5. ENDFASSUNG DES KONTUREXTRAKTIONSALGORITHMUS
+0050 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0053 KAPITEL 5. KONTURREPR ÄSENTATION UND MERKMALSEXTRAKTION
+0053 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0054 5.2. ANFORDERUNG AN DIE MERKMALE
+0054 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0055 KAPITEL 5. KONTURREPR ÄSENTATION UND MERKMALSEXTRAKTION
+0055 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0056 5.3. EINFACHE GEOMETRISCHE MERKMALE
+0056 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0057 KAPITEL 5. KONTURREPR ÄSENTATION UND MERKMALSEXTRAKTION
+0057 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0058 5.4. MERKMALSEXTRAKTION MITTELS MOMENTEN
+0058 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0059 KAPITEL 5. KONTURREPR ÄSENTATION UND MERKMALSEXTRAKTION
+0059 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0060 5.4. MERKMALSEXTRAKTION MITTELS MOMENTEN
+0060 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0061 KAPITEL 5. KONTURREPR ÄSENTATION UND MERKMALSEXTRAKTION
+0061 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0062 5.5. REPR ÄSENTATION DURCH DEN CURVATURE-SCALE-SPACE (CSS)
+0062 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0063 KAPITEL 5. KONTURREPR ÄSENTATION UND MERKMALSEXTRAKTION
+0063 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0064 5.5. REPR ÄSENTATION DURCH DEN CURVATURE-SCALE-SPACE (CSS)
+0064 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0065 KAPITEL 5. KONTURREPR ÄSENTATION UND MERKMALSEXTRAKTION
+0065 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0066 5.5. REPR ÄSENTATION DURCH DEN CURVATURE-SCALE-SPACE (CSS)
+0066 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0067 KAPITEL 5. KONTURREPR ÄSENTATION UND MERKMALSEXTRAKTION
+0067 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0068 5.5. REPR ÄSENTATION DURCH DEN CURVATURE-SCALE-SPACE (CSS)
+0068 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0069 KAPITEL 5. KONTURREPR ÄSENTATION UND MERKMALSEXTRAKTION
+0069 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0070 5.7. REPR ÄSENTATION DURCH FOURIER-DESKRIPTOREN
+0070 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0071 KAPITEL 5. KONTURREPR ÄSENTATION UND MERKMALSEXTRAKTION
+0071 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0073 KAPITEL 6. KLASSIFIKATION
+0073 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0074 6.3. KLASSIFIKATION MITTELS SUPPORT-VECTOR-MACHINES (SVM)
+0074 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0075 KAPITEL 6. KLASSIFIKATION
+0075 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0076 6.3. KLASSIFIKATION MITTELS SUPPORT-VECTOR-MACHINES (SVM)
+0076 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0077 KAPITEL 6. KLASSIFIKATION
+0077 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0078 6.3. KLASSIFIKATION MITTELS SUPPORT-VECTOR-MACHINES (SVM)
+0078 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0079 KAPITEL 6. KLASSIFIKATION
+0079 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0080 6.4. VIOLA JONES ADABOOST KLASSIFIKATOR
+0080 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0083 KAPITEL 7. PERFORMANZEVALUATION
+0083 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0084 7.1. RECEIVER-OPERATING-CHARACTERISTICS (ROC)-ANALYSE
+0084 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0085 KAPITEL 7. PERFORMANZEVALUATION
+0085 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0086 7.1. RECEIVER-OPERATING-CHARACTERISTICS (ROC)-ANALYSE
+0086 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0087 KAPITEL 7. PERFORMANZEVALUATION
+0087 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0088 7.2. ERGEBNIS DER PERFORMANZ-ANALYSE
+0088 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0089 KAPITEL 7. PERFORMANZEVALUATION
+0089 tp RateKonturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0090 7.2. ERGEBNIS DER PERFORMANZ-ANALYSE
+0090 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners 0.15 0.05 kombinierte Methode
 0091 KAPITEL 7. PERFORMANZEVALUATION
+0091 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0092 7.2. ERGEBNIS DER PERFORMANZ-ANALYSE
+0092 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners kombinierte Methode
 0093 KAPITEL 7. PERFORMANZEVALUATION
+0093 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0094 7.2. ERGEBNIS DER PERFORMANZ-ANALYSE
+0094 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners kombinierte Methode
 0095 KAPITEL 7. PERFORMANZEVALUATION
+0095 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0096 7.2. ERGEBNIS DER PERFORMANZ-ANALYSE
+0096 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0099 KAPITEL 8. ZUSAMMENFASSUNG UND AUSBLICK
+0099 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0103 86 ANHANG B. CURVATURE-SCALE-SPACE-MATCHING-VERFAHREN NACH MOKHTARIAN
+0103 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0105 LITERATURVERZEICHNIS
+0105 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0106 LITERATURVERZEICHNIS
+0106 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0107 LITERATURVERZEICHNIS
+0107 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
 0108 LITERATURVERZEICHNIS
+0108 Konturbasierte Objekterkennung aus Tiefenbildern eines 3D-Laserscanners
