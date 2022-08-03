@@ -51,6 +51,11 @@ FOOTER_SIZE_MAX = configo.HV_PERCENT_PLUS(default=20, limit=100)
 
 HORIZONTALS_MATCH_DIFF_MAX = configo.HV_INT_PLUS(default=10)
 
+# 10% percent cause of bad font-bounding-boxing
+HEADER_PARSING_TOL = configo.HV_PERCENT_PLUS(default=10, limit=25)
+# TODO: PRECENT_MINUS
+FOOTER_PARSING_TOL = configo.HV_PERCENT_PLUS(default=0, limit=25)
+
 
 class FixedHeadnoteStrategy(headnote.strategy.HeadnoteDetectionStrategy):
     """The `FixedHeadnoteStategy` detects footer and header depending on
@@ -205,12 +210,6 @@ def extract_page_footerheader(
     return result
 
 
-# 10% percent cause of bad font-bounding-boxing
-HEADER_PARSING_TOL = configo.HV_PERCENT_PLUS(default=10, limit=25)
-# TODO: PRECENT_MINUS
-FOOTER_PARSING_TOL = configo.HV_PERCENT_PLUS(default=0, limit=25)
-
-
 def create_info_area(
     navigator,
     top: float,
@@ -238,10 +237,9 @@ def extract_inarea(
     max_group_count: int = 1,
     min_group_size: int = CLUSTER_SIZE_MIN,
 ) -> float:
-    """Determine all elements in the potential footer/header area"""
+    """Determine all elements in the potential footer/header area."""
     ymin = pageheight * upper_bound
     ymax = pageheight * lower_bound
-
     result = headnote.horizontals.biggest_hlinecluster_in_area(
         clusters,
         ymin=ymin,

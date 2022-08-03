@@ -40,9 +40,6 @@ class HeadnoteDetectionStrategy(abc.ABC):
         assert isinstance(horizontals, typing.List), str(horizontals)
         self.horizontals = horizontals
         self.ptns = ptns
-
-        self.result__ = {}
-
         self.post_init()
 
     def post_init(self):
