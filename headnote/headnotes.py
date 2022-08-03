@@ -25,7 +25,7 @@ def parse(content: str):
     for item in content:
         parsed = None
         for strategy in strategies:
-            parsed = strategy(item.text, item.bounding)
+            parsed = strategy(item.text)
             if parsed:
                 break
         if not parsed:
@@ -34,20 +34,20 @@ def parse(content: str):
     return result
 
 
-def parse_rawtext(text: str, _=None):  # pylint:disable=W0613
+def parse_rawtext(text: str):
     if text.count(utila.NEWLINE) <= 2:
         return None
     return iamraw.RawText(text=text.strip())
 
 
-def parse_pagenumber(text: str, _=None):  # pylint:disable=W0613
+def parse_pagenumber(text: str):
     text = text.strip()
     if not elements.ispagenumber(text):
         return None
     return iamraw.PageInformation(value=text, raw=text)
 
 
-def parse_title(text: str, _=None) -> iamraw.HeaderTitle:  # pylint:disable=W0613
+def parse_title(text: str) -> iamraw.HeaderTitle:
     regex = parse_title_regex(text)
     if regex:
         return regex
