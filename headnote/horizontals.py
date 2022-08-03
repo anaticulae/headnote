@@ -13,8 +13,6 @@ import configo
 import iamraw
 import utila
 
-import headnote.likelihood
-
 ASSERT_HORIZONTAL_DIFF_MAX = configo.HV_FLOAT_PLUS(default=5.0)
 
 
@@ -73,7 +71,7 @@ def biggest_hlinecluster_in_area(
         return None
     # remove clusters with to few elements
     valid = [item for item in valid if len(item) >= min_group_size]
-    maximized = headnote.likelihood.select_maxi(
+    maximized = utila.select_maxi(
         valid,
         count=max_group_count,
     )
