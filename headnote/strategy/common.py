@@ -345,6 +345,35 @@ class PageExtension:
         return page.before(AREA_TOP)
 
 
+class PageExtensionFooter(PageExtension):
+
+    def determine_border(self, bounding, pageheight) -> float:  # pylint:disable=R0201
+        end = bounding.y0 / pageheight
+        end = utila.roundme(end - HEADER_TOL)
+        return end
+
+    def create_ctor(self, border: float, pagenumber: int):  # pylint:disable=R0201
+        current = iamraw.FixedFooterInfo(
+            begin=border,
+            end=texmex.END,
+            page=iamraw.PageInformation(value=pagenumber, raw=None),
+        )
+        return current
+
+    def finish(self, extensions):  # pylint:disable=R0201
+        result = [
+            iamraw.PageContentFooterHeader(
+                header=None,
+                footer=footer,
+                page=page,
+            ) for (page, footer) in extensions
+        ]
+        return result
+
+    def candidats_select(self, page):  # pylint:disable=R0201
+        return page.after(AREA_BOTTOM)
+
+
 HEADER_OCCURRENCE_MIN = configo.HolyTable(
     items=(
         (0, 5),
