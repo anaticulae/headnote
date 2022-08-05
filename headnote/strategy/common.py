@@ -94,33 +94,6 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         result = self.verify_result(result)
         return result
 
-    def determine_header(self):
-        extracted = cluster_pages(
-            self.ptns,
-            select=potential_header_data,
-            convert=create_fixedheader,
-        )
-        tryagain = cluster_pages(
-            self.ptns,
-            select=potential_header_data,
-            convert=create_fixedheader,
-            tryagain=True,
-        )
-        clusters = None
-        if extracted:
-            headers = best(extracted[0], tryagain[0])
-            if headers == extracted[0]:
-                clusters = extracted[1]
-            else:
-                clusters = tryagain[1]
-        else:
-            headers = tryagain[0] if tryagain else []
-            if tryagain:
-                clusters = tryagain[1]
-            else:
-                clusters = None
-        return headers, clusters
-
     def determine_footer(self):
         extracted = cluster_pages(
             self.ptns,
@@ -478,32 +451,6 @@ def convert_cluster(
     return result
 
 
-def create_fixedheader(
-    current,
-    text: str,
-    pagenumber,
-    end,
-) -> iamraw.FixedHeaderInformation:
-    # remove newline at end TODO: REMOVE LATER
-    text = text.strip()
-    if current is None:
-        current = iamraw.FixedHeaderInformation(
-            begin=texmex.START,
-            end=end,
-            page=iamraw.PageInformation(value=pagenumber, raw=None),
-        )
-    title = headnote.headnotes.parse_title(text)
-    if title:
-        current.title = title
-        return current
-    parsed = headnote.headnotes.parse_pagenumber(text)
-    if parsed:
-        current.page = parsed
-        return current
-    current.undefined.append(iamraw.RawText(text=text))
-    return current
-
-
 def create_fixedfooter(
     current,
     text: str,
@@ -564,19 +511,6 @@ def valid_line(text: str, valid: set) -> bool:
     return False
 
 
-def potential_header_data(ptns):
-    collected = []
-    for page in ptns:
-        content = [(
-            item.bounding,
-            item,
-            page.height,
-            page.page,
-        ) for item in page.before(AREA_TOP) if not noheader_content(item)]
-        collected.append(content)
-    return collected
-
-
 def potential_footer_data(ptns):
     collected = []
     for page in ptns:
@@ -634,7 +568,7 @@ def more_magic(ptns, clusters, convert: callable):
     """Revisit pages without detected header and try to match header
     items with already detected areas."""
     valid = utila.flatten([list(cluster) for cluster in clusters])
-    data = potential_header_data(ptns)
+    data = potential_footer_data(ptns)
     result = []
     for page in data:
         for item in page:
