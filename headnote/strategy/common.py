@@ -270,15 +270,23 @@ class PageExtension:
         grouped = {}
         for cluster in clusters:
             for bounding, text, pageheight, pagenumber in cluster:
-                end = bounding.y1 / pageheight
-                end = utila.roundme(end + HEADER_TOL)
-                current = grouped.get(pagenumber, None)
-                current = self.create(current, text.text, pagenumber, end)
+                border = self.determine_border(bounding, pageheight)
+                current = self.create(
+                    grouped.get(pagenumber, None),
+                    text.text,
+                    pagenumber,
+                    border=border,
+                )
                 grouped[pagenumber] = current
         result = list(grouped.items())
         # sort FixedHeaderInformation by page
         result.sort(key=lambda x: x[0])
         return result
+
+    def determine_border(self, bounding, pageheight) -> float:  # pylint:disable=R0201
+        end = bounding.y1 / pageheight
+        end = utila.roundme(end + HEADER_TOL)
+        return end
 
     def create(  # pylint:disable=R0201
         self,
