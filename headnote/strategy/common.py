@@ -295,7 +295,7 @@ class PageExtensionFooter(PageExtension):
 
     def determine_border(self, bounding, pageheight) -> float:  # pylint:disable=R0201
         end = bounding.y0 / pageheight
-        end = utila.roundme(end - HEADER_TOL)
+        end = utila.roundme(end + FOOTER_TOL)
         return end
 
     def create_ctor(self, border: float, pagenumber: int):  # pylint:disable=R0201
@@ -370,6 +370,8 @@ def count_empty(collected) -> int:
 
 # plus 1 percent off to ensure that content and header is separated correctly.
 HEADER_TOL = configo.HV_FLOAT_PLUS(default=0.01)
+
+FOOTER_TOL = configo.HV_FLOAT_PLUS(default=0.00)
 
 HEADER_TEXT_OCCURENCE_TRYAGAIN_MIN = configo.HV_INT_PLUS(default=3)
 
