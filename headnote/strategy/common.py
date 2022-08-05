@@ -178,8 +178,10 @@ class PageExtension:
         return result
 
     def more_magic(self, potential, clusters):
-        """Revisit pages without detected header and try to match header
-        items with already detected areas."""
+        """Revisit pages without detected extension.
+
+        Try to match extension items with already detected areas.
+        """
         valid = utila.flatten([list(cluster) for cluster in clusters])
         potential = self.candidats(ptns=potential)
         result = []
