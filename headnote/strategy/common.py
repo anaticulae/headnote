@@ -76,22 +76,8 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         return result
 
     def result_footer(self):
-        footers, clusters = self.determine_footer()
-        if not footers:
-            return []
-        footers = self.second_try(
-            footers,
-            clusters,
-            convert=create_fixedfooter,
-        )
-        result = [
-            iamraw.PageContentFooterHeader(
-                header=None,
-                footer=footer,
-                page=page,
-            ) for (page, footer) in footers
-        ]
-        result = self.verify_result(result)
+        strategy = PageExtensionFooter(ptns=self.ptns)
+        result = strategy.result()
         return result
 
     def determine_footer(self):
