@@ -313,13 +313,13 @@ class PageExtension:
         )
         return current
 
-    def finish(self, headers):  # pylint:disable=R0201
+    def finish(self, extensions):  # pylint:disable=R0201
         result = [
             iamraw.PageContentFooterHeader(
                 header=header,
                 footer=None,
                 page=page,
-            ) for (page, header) in headers
+            ) for (page, header) in extensions
         ]
         return result
 
