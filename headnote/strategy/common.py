@@ -318,17 +318,14 @@ class PageExtensionFooter(PageExtension):
         return page.after(AREA_BOTTOM)
 
 
-HEADER_OCCURRENCE_MIN = configo.HolyTable(
-    items=(
-        (0, 5),
-        (10, 4),
-        (15, 7),
-        (30, 12),
-        (50, 14),
-        (100, 25),
-    ),
-    right_outranges_none=False,
-)
+HEADER_OCCURRENCE_MIN = configo.HolyTable(items=(
+    (0, 5),
+    (10, 4),
+    (15, 7),
+    (30, 12),
+    (50, 14),
+    (100, 25),
+))
 
 
 def best(*items):
