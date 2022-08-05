@@ -180,6 +180,204 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         return headers
 
 
+HEADER_TEXT_OCCURENCE_MIN = configo.HV_INT_PLUS(default=5)
+
+
+class PageExtension:
+
+    def __init__(self, ptns):
+        self.ptns = ptns
+
+    def result(self):
+        potential = self.candidats()
+        extentions = self.cluster(potential)
+        converted = self.finish(extentions)
+        result = self.verify(converted)
+        return result
+
+    def candidats(self, ptns=None):
+        if ptns is None:
+            ptns = self.ptns
+        collected = []
+        for page in ptns:
+            data = self.candidats_select(page)
+            content = [(
+                item.bounding,
+                item,
+                page.height,
+                page.page,
+            ) for item in data if not noheader_content(item)]
+            collected.append(content)
+        return collected
+
+    def cluster(self, potential):
+        extracted = self.cluster_pages(potential)
+        tryagain = self.cluster_pages(potential, tryagain=True)
+        extensions, clusters = self.merge_again(
+            extracted,
+            tryagain,
+        )
+        if not extensions:
+            return []
+        extensions = self.second_try(
+            extensions=extensions,
+            clusters=clusters,
+        )
+        return extensions
+
+    def cluster_prepare(  # pylint:disable=R0201
+        self,
+        collected,
+        occurrence_min: int = HEADER_TEXT_OCCURENCE_MIN,
+    ):
+        valid = header_content(collected, occurrence_min=occurrence_min)
+        result = []
+        for page in collected:
+            content = [item for item in page if valid_line(item[1].text, valid)]
+            result.append(content)
+        return result
+
+    def cluster_pages(
+        self,
+        ptns: texmex.PTNs,
+        tryagain: bool = False,
+    ):
+        occurrence_min = HEADER_TEXT_OCCURENCE_MIN
+        if tryagain:
+            # run algorithmn with lower bound to gather more data but may be
+            # more instable.
+            occurrence_min = HEADER_TEXT_OCCURENCE_TRYAGAIN_MIN
+        # prepare data
+        with_box = utila.flatten(
+            self.cluster_prepare(
+                ptns,
+                occurrence_min=occurrence_min,
+            ))
+        page_count = len(ptns)
+        cluster_length_min = OCCURRENCE_MIN(page_count)
+        # TODO: REMOVE LATER, SWITCH TABLE BASED ENTROPY OF POTENTIAL HEADER AREA?
+        cluster_length_min = 5
+        clusters = utila.three_side_equal_cluster(  # pylint:disable=E1123
+            todo=with_box,
+            max_diff=COMMON_HEADER_ERROR_MAX,
+            min_elements=cluster_length_min,
+        )
+        if not clusters:
+            return None
+        result = self.convert_cluster(clusters)
+        return result, clusters
+
+    def second_try(self, extensions, clusters):
+        # do not revisit pages with already detected header
+        skip = {item[0] for item in extensions}
+        ptns_left = [page for page in self.ptns if page.page not in skip]
+        result = self.more_magic(ptns_left, clusters)
+        return result
+
+    def more_magic(self, potential, clusters):
+        """Revisit pages without detected header and try to match header
+        items with already detected areas."""
+        valid = utila.flatten([list(cluster) for cluster in clusters])
+        potential = self.candidats(ptns=potential)
+        result = []
+        for page in potential:
+            for item in page:
+                if not any((matches(val, item) for val in valid)):
+                    continue
+                result.append(item)
+        result = self.convert_cluster([result] + [valid])
+        return result
+
+    def merge_again(self, extracted, tryagain):  # pylint:disable=R0201
+        clusters = None
+        if extracted:
+            headers = best(extracted[0], tryagain[0])
+            if headers == extracted[0]:
+                clusters = extracted[1]
+            else:
+                clusters = tryagain[1]
+        else:
+            headers = tryagain[0] if tryagain else []
+            if tryagain:
+                clusters = tryagain[1]
+            else:
+                clusters = None
+        return headers, clusters
+
+    def convert_cluster(
+        self,
+        clusters,
+    ) -> list:
+        grouped = {}
+        for cluster in clusters:
+            for bounding, text, pageheight, pagenumber in cluster:
+                end = bounding.y1 / pageheight
+                end = utila.roundme(end + HEADER_TOL)
+                current = grouped.get(pagenumber, None)
+                current = self.create(current, text.text, pagenumber, end)
+                grouped[pagenumber] = current
+        result = list(grouped.items())
+        # sort FixedHeaderInformation by page
+        result.sort(key=lambda x: x[0])
+        return result
+
+    def create(  # pylint:disable=R0201
+        self,
+        current,
+        text: str,
+        pagenumber,
+        border,
+    ) -> iamraw.FixedHeaderInformation:
+        # remove newline at end TODO: REMOVE LATER
+        text = text.strip()
+        if current is None:
+            current = self.create_ctor(
+                border=border,
+                pagenumber=pagenumber,
+            )
+        title = headnote.headnotes.parse_title(text)
+        if title:
+            current.title = title
+            return current
+        parsed = headnote.headnotes.parse_pagenumber(text)
+        if parsed:
+            current.page = parsed
+            return current
+        current.undefined.append(iamraw.RawText(text=text))
+        return current
+
+    def create_ctor(self, border: float, pagenumber: int):  # pylint:disable=R0201
+        current = iamraw.FixedHeaderInformation(
+            begin=texmex.START,
+            end=border,
+            page=iamraw.PageInformation(value=pagenumber, raw=None),
+        )
+        return current
+
+    def finish(self, headers):  # pylint:disable=R0201
+        result = [
+            iamraw.PageContentFooterHeader(
+                header=header,
+                footer=None,
+                page=page,
+            ) for (page, header) in headers
+        ]
+        return result
+
+    def verify(self, headers):
+        pagecount = len(self.ptns)
+        headercount = len([it for it in headers if it.header or it.footer])
+        required = HEADER_OCCURRENCE_MIN(pagecount)
+        if headercount < required:
+            utila.debug(f'disable header common too few header: {headercount} '
+                        f'pages: {pagecount} required: {required}')
+            return []
+        return headers
+
+    def candidats_select(self, page):  # pylint:disable=R0201
+        return page.before(AREA_TOP)
+
+
 HEADER_OCCURRENCE_MIN = configo.HolyTable(
     items=(
         (0, 5),
@@ -274,12 +472,17 @@ def cluster_pages(
 def convert_cluster(
     clusters,
     convert: callable,
+    top: bool = True,
 ) -> list:
     grouped = {}
     for cluster in clusters:
         for bounding, text, pageheight, pagenumber in cluster:
-            end = bounding.y1 / pageheight
-            end = utila.roundme(HEADER_TOL + end)
+            if top:
+                end = bounding.y1 / pageheight
+                end = utila.roundme(end + HEADER_TOL)
+            else:
+                end = bounding.y0 / pageheight
+                end = utila.roundme(end - HEADER_TOL)
             current = grouped.get(pagenumber, None)
             current = convert(current, text.text, pagenumber, end)
             grouped[pagenumber] = current
@@ -340,8 +543,6 @@ def create_fixedfooter(
     current.undefined.append(iamraw.RawText(text=text))
     return current
 
-
-HEADER_TEXT_OCCURENCE_MIN = configo.HV_INT_PLUS(default=5)
 
 HEADER_TEXT_OCCURENCE_TRYAGAIN_MIN = configo.HV_INT_PLUS(default=3)
 
