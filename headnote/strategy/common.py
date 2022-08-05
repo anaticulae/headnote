@@ -49,6 +49,21 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
     def result(self):
         headers = self.result_header()
         footers = self.result_footer()
+        result = CommonTextStrategy.merge_results(headers, footers)
+        return result
+
+    def result_header(self):
+        strategy = PageExtension(ptns=self.ptns)
+        result = strategy.result()
+        return result
+
+    def result_footer(self):
+        strategy = PageExtensionFooter(ptns=self.ptns)
+        result = strategy.result()
+        return result
+
+    @staticmethod
+    def merge_results(headers, footers) -> list:
         merged = sorted(
             headers + footers,
             key=lambda x: x.page,
@@ -65,16 +80,6 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
                     before.header = item.header
             else:
                 result.append(item)
-        return result
-
-    def result_header(self):
-        strategy = PageExtension(ptns=self.ptns)
-        result = strategy.result()
-        return result
-
-    def result_footer(self):
-        strategy = PageExtensionFooter(ptns=self.ptns)
-        result = strategy.result()
         return result
 
 
