@@ -30,17 +30,14 @@ import headnote.strategy
 
 COMMON_HEADER_ERROR_MAX = configo.HV_FLOAT_PLUS(default=10.0)
 # minimal items in a cluster to be detected and accepted as feature.
-OCCURRENCE_MIN = configo.HolyTable(
-    items=(
-        (0, 5),
-        (10, 5),
-        (15, 8),
-        (30, 12),
-        (50, 14),
-        (100, 25),
-    ),
-    right_outranges_none=False,
-)
+OCCURRENCE_MIN = configo.HolyTable(items=(
+    (0, 5),
+    (10, 5),
+    (15, 8),
+    (30, 12),
+    (50, 14),
+    (100, 25),
+))
 
 AREA_TOP = configo.HV_PERCENT_PLUS(default=15)
 
