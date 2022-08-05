@@ -7,9 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import iamraw
 import power
 import serializeraw
-import utila
 
 import tests
 
@@ -26,7 +26,7 @@ def test_footer_regression_common_strategy(td, mp):
     page = 1
     cmd = f'-i {source} -o {root} --pages=0:10'
     tests.run(cmd, mp=mp)
-    path = utila.join(root, 'headnote__common_common.yaml')
+    path = iamraw.path.headnote_common(root)
     headerfooter = serializeraw.load_headerfooter(path)
     assert len(headerfooter) == 8
     # Hint: this result is not produced by common strategy
