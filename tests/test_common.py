@@ -10,10 +10,12 @@
 import iamraw
 import power
 import serializeraw
+import utilatest
 
 import tests
 
 
+@utilatest.requires(power.BACHELOR037_PDF)
 def test_footer_regression_common_strategy(td, mp):
     """There was a bug in handling selective --pages=1 correctly.
 

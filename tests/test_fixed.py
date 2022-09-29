@@ -90,6 +90,7 @@ def test_footer_dump_and_load_bachelor111():
 
 
 def _docu027():
+    utilatest.fixture_requires(power.DOCU027_PDF)
     source = power.link(power.DOCU027_PDF)
     horizontals = iamraw.path.horizontals(source)
     horizontals = serializeraw.load_horizontals(horizontals)
@@ -103,6 +104,7 @@ def _docu027():
 
 
 def _bachelor111():
+    utilatest.fixture_requires(power.BACHELOR111_PDF)
     source = power.link(power.BACHELOR111_PDF)
     horizontals = iamraw.path.horizontals(source)
     horizontals = serializeraw.load_horizontals(horizontals)
