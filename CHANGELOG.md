@@ -2,6 +2,35 @@
 
 Every noteable change is logged here.
 
+## v0.3.0 (2022-09-29)
+
+### Feature
+
+* connect common footer strategy (ef73197e1b24)
+* add object oriented footer strategy (25346d92ff7d)
+* move border determination into separate method (e6c79dc88274)
+* connect object oriented strategy (849aaee06d25)
+* convert to object oriented approach (d61db1b596cb)
+
+### Fix
+
+* introduce separate footer const (2bb80ddcfa2d)
+
+### Documentation
+
+* format docs (6b8d5d1d0007)
+
+### Chore
+
+* add missing dev resource (503b092c8988)
+* add opengl for resource generator (c939d5548f45)
+* add separate generator step (484f5a9de089)
+* add missing dev requirement (e340776e663d)
+* increase worker count on CI (78aea8a67824)
+* add Jenkinsfile (c89e0e1d68ab)
+* upgrade requirements.txt (8a1f614050a9)
+* upgrade requirements.txt (f1c933ec7e74)
+
 ## v0.2.1
 
 ### Feature
