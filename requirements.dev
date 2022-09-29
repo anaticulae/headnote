@@ -14,13 +14,13 @@ power==2.14.1
 hardcore>=0.7.0<1.0.0
 
 # test data generator
-genex==0.35.1
+genex==0.35.2
 
-cleanup>=0.6.0<1.0.0
+cleanup>=0.7.0<1.0.0
 rawmaker>=2.40.0<3.0.0
 pdfinfo>=0.1.3<1.0.0
 
 # TODO: REMOVE LATER
 footnote>=0.2.2<1.0.0
-groupme>=0.36.1<0.37.0
-figureo>=0.17.3<0.18.0
+groupme>=0.37.0<0.37.0
+figureo>=0.18.0<0.18.0
