@@ -191,9 +191,9 @@ def extract_page_footerheader(
                 expected=bottom,
                 diff_max=HORIZONTALS_MATCH_DIFF_MAX,
         ):
+            start = bottom / textnavigator.height * (1 + FOOTER_PARSING_TOL)
             footer = create_info_area(
-                top=utila.roundme(bottom / textnavigator.height *
-                                  (1 + FOOTER_PARSING_TOL)),
+                top=utila.roundme(start),
                 bottom=texmex.END,
                 navigator=textnavigator,
                 ctor=iamraw.FixedFooterInfo,
@@ -218,7 +218,7 @@ def create_info_area(
 ):
     content = navigator.between(top, bottom)
     parsed = headnote.headnotes.parse(content)
-    result = ctor(begin=texmex.START, end=bottom)
+    result = ctor(begin=top, end=bottom)
     for item in parsed:
         if isinstance(item, iamraw.HeaderTitle):
             result.title = item

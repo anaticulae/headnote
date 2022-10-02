@@ -38,3 +38,18 @@ def test_bachelor063_page1(td, mp):
     footer_y0 = selected.footer.begin
     footer_y1 = selected.footer.end
     assert 0.93 <= footer_y0 <= footer_y1 <= 1.0
+
+
+@utilatest.requires(power.BACHELOR063_PDF)
+def test_bachelor063_all(td, mp):
+    result = run_headnotes(td, mp, pages='0:30')
+    selected = utila.select_page(result, page=1)
+    # header
+    header_y0 = selected.header.begin
+    header_y1 = selected.header.end
+    assert header_y1 >= 0.06, header_y1
+    assert 0.0 <= header_y0 <= header_y1 <= 0.08
+    # footer
+    footer_y0 = selected.footer.begin
+    footer_y1 = selected.footer.end
+    assert 0.93 <= footer_y0 <= footer_y1 <= 1.0
