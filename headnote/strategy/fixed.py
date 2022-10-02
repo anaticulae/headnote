@@ -218,7 +218,7 @@ def create_info_area(
 ):
     content = navigator.between(top, bottom)
     parsed = headnote.headnotes.parse(content)
-    result = ctor(begin=texmex.START, end=top)
+    result = ctor(begin=texmex.START, end=bottom)
     for item in parsed:
         if isinstance(item, iamraw.HeaderTitle):
             result.title = item
