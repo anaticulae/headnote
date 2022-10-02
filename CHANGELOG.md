@@ -2,6 +2,18 @@
 
 Every noteable change is logged here.
 
+## v0.3.2 (2022-10-03)
+
+### Fix
+
+* adjust footer info (f62aeb9946b5)
+* ensure correct dimension (74d5dafdd019)
+
+### Chore
+
+* extend test data generator (a1e1cb7c353e)
+* upgrade requirements.txt (8c4c7d22ab59)
+
 ## v0.3.1 (2022-09-29)
 
 ### Chore
