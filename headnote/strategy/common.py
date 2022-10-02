@@ -225,7 +225,7 @@ class PageExtension:
                 )
                 grouped[pagenumber] = current
         result = list(grouped.items())
-        # sort FixedHeaderInformation by page
+        # sort FixedHeaderInfo by page
         result.sort(key=lambda x: x[0])
         return result
 
@@ -240,7 +240,7 @@ class PageExtension:
         text: str,
         pagenumber,
         border,
-    ) -> iamraw.FixedHeaderInformation:
+    ) -> iamraw.FixedHeaderInfo:
         # remove newline at end TODO: REMOVE LATER
         text = text.strip()
         if current is None:
@@ -260,7 +260,7 @@ class PageExtension:
         return current
 
     def create_ctor(self, border: float, pagenumber: int):  # pylint:disable=R0201
-        current = iamraw.FixedHeaderInformation(
+        current = iamraw.FixedHeaderInfo(
             begin=texmex.START,
             end=border,
             page=iamraw.PageInformation(value=pagenumber, raw=None),

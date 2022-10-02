@@ -196,7 +196,7 @@ def extract_page_footerheader(
                                   (1 + FOOTER_PARSING_TOL)),
                 bottom=texmex.END,
                 navigator=textnavigator,
-                ctor=iamraw.FixedFooterInformation,
+                ctor=iamraw.FixedFooterInfo,
             )
         if header is None and footer is None:
             # no matching horizontals
@@ -214,7 +214,7 @@ def create_info_area(
     navigator,
     top: float,
     bottom: float,
-    ctor=iamraw.FixedHeaderInformation,
+    ctor=iamraw.FixedHeaderInfo,
 ):
     content = navigator.between(top, bottom)
     parsed = headnote.headnotes.parse(content)
