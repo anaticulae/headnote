@@ -19,7 +19,7 @@ import headnote.strategy
 import headnote.strategy.fixed
 
 
-def test_docu027_extract_common_footer():
+def test_docu027_extract_common_header():
     _, __, top, bottom, ___ = _docu027()
     assert top  # document has header
     assert bottom  # document has footer
@@ -42,7 +42,7 @@ def test_docu027_extract_page_footerheader():
 
 
 @utilatest.longrun
-def test_bachelor111page_extract_common_footer():
+def test_bachelor111page_extract_common_header():
     _, __, top, bottom, ___ = _bachelor111()
     assert top  # document has header
     assert bottom  # document has footer
@@ -96,7 +96,7 @@ def _docu027():
     horizontals = serializeraw.load_horizontals(horizontals)
     navigators = serializeraw.ptn_frompath(source)
     pageheight = navigators[0].height
-    top, bottom = headnote.strategy.fixed.extract_common_footer(
+    top, bottom = headnote.strategy.fixed.extract_common_header(
         horizontals=horizontals,
         pageheight=pageheight,
     )
@@ -110,7 +110,7 @@ def _bachelor111():
     horizontals = serializeraw.load_horizontals(horizontals)
     navigators = serializeraw.ptn_frompath(source)
     pageheight = navigators[0].height
-    top, bottom = headnote.strategy.fixed.extract_common_footer(
+    top, bottom = headnote.strategy.fixed.extract_common_header(
         horizontals=horizontals,
         pageheight=pageheight,
     )

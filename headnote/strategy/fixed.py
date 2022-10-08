@@ -77,7 +77,7 @@ class FixedHeadnoteStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         first_page = self.ptns[0].page
         pageheight = self.pageheight(first_page)
         # determine most common border for all pages
-        tops, bottoms = extract_common_footer(
+        tops, bottoms = extract_common_header(
             horizontals=self.horizontals,
             pageheight=pageheight,
             max_group_count=FOOTERHEADER_AREA_COUNT_MAX,
@@ -99,7 +99,7 @@ class FixedHeadnoteStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         pass
 
 
-def extract_common_footer(
+def extract_common_header(
     horizontals: iamraw.PagesWithHorizontalList,
     pageheight: int,
     max_group_count: int = 1,
