@@ -20,8 +20,8 @@ def match(
     content: iamraw.PageContentHorizontals,
     expected: float,
     diff_max: float = 2.0,
-) -> bool:
-    """Check if any horizontal match the `vertical_position`
+) -> list:
+    """Check if any horizontal match the `vertical_position`.
 
     Args:
         content(PageContentHorizontals): list with horizontal lines,
@@ -32,7 +32,11 @@ def match(
         True if any horizontal line match the `expected`
     """
     # TODO: Check y0/y1
-    result = any(utila.near(item.box.y0, expected, diff=diff_max) for item in content)  # yapf:disable
+    result = [
+        item for item in content
+        if utila.near(item.box.y0, expected, diff=diff_max)
+    ]
+    result = [tuple(item.box) for item in result]
     return result
 
 
