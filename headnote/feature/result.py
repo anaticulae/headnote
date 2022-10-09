@@ -81,6 +81,8 @@ def judge_strategy(
                 # TODO: MORE THAN ONE EXTRACTION CAN HAVE BEST
                 # EXTRACTION QUALITY.
                 footer = common.footer
+        if not header and not footer:
+            continue
         # log footer best
         if footer_best:
             utila.verbose(f'footer: {pagenumber} {footer_best}')
@@ -89,8 +91,6 @@ def judge_strategy(
             footer=footer,
             page=pagenumber,
         )
-        if not header and not footer:
-            continue
         result.append(current)
     validate(result)
     page_order = [item.page for item in result]
