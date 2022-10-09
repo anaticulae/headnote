@@ -22,9 +22,20 @@ import tests
 ARCHIVE = utila.join(headnote.ROOT, 'tests/expected', exist=True)
 
 
+def monday(item):
+    if item in {
+            power.DISS143_PDF,
+            power.DISS144_PDF,
+            power.HC_DISS171,
+            power.HC_DISS193,
+    }:
+        return utilatest.monday
+    return None
+
+
 @pytest.mark.parametrize(
     'source',
-    utilatest.test_resources(tests.conftest.RESOURCES),
+    utilatest.test_resources(tests.conftest.RESOURCES, marker=monday),
 )
 @utilatest.nightly
 def test_validate(source, td, mp):
