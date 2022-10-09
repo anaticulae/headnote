@@ -174,30 +174,36 @@ def extract_page_footerheader(
     for page in horizontals:
         textnavigator = utila.select_page(ptns, page.page)
         header = None
-        if top is not None and headnote.horizontals.match(
+        if top is not None:
+            refs = headnote.horizontals.match(
                 content=page.content,
                 expected=top,
                 diff_max=HORIZONTALS_MATCH_DIFF_MAX,
-        ):
-            header = create_info_area(
-                top=texmex.START,
-                bottom=utila.roundme(top / textnavigator.height *
-                                     (1 + HEADER_PARSING_TOL)),
-                navigator=textnavigator,
             )
+            if refs:
+                header = create_info_area(
+                    top=texmex.START,
+                    bottom=utila.roundme(top / textnavigator.height *
+                                         (1 + HEADER_PARSING_TOL)),
+                    navigator=textnavigator,
+                    refs=refs,
+                )
         footer = None
-        if bottom is not None and headnote.horizontals.match(
+        if bottom is not None:
+            refs = headnote.horizontals.match(
                 content=page.content,
                 expected=bottom,
                 diff_max=HORIZONTALS_MATCH_DIFF_MAX,
-        ):
-            start = bottom / textnavigator.height * (1 + FOOTER_PARSING_TOL)
-            footer = create_info_area(
-                top=utila.roundme(start),
-                bottom=texmex.END,
-                navigator=textnavigator,
-                ctor=iamraw.FixedFooterInfo,
             )
+            if refs:
+                start = bottom / textnavigator.height * (1 + FOOTER_PARSING_TOL)
+                footer = create_info_area(
+                    top=utila.roundme(start),
+                    bottom=texmex.END,
+                    navigator=textnavigator,
+                    ctor=iamraw.FixedFooterInfo,
+                    refs=refs,
+                )
         if header is None and footer is None:
             # no matching horizontals
             continue
@@ -215,6 +221,7 @@ def create_info_area(
     top: float,
     bottom: float,
     ctor=iamraw.FixedHeaderInfo,
+    refs=None,
 ):
     content = navigator.between(top, bottom)
     parsed = headnote.headnotes.parse(content)
@@ -226,6 +233,8 @@ def create_info_area(
             result.undefined.append(item)
         if isinstance(item, iamraw.PageInformation):
             result.page = item
+        if refs:
+            result.refs = refs
     return result
 
 
