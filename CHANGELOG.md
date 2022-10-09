@@ -2,6 +2,25 @@
 
 Every noteable change is logged here.
 
+## v0.4.0 (2022-10-09)
+
+### Feature
+
+* serialize selected strategy (e90731d51e17)
+* add matched horizontals to fixed header (698820392751)
+* change return type to use matched result (3cddf36e1c11)
+
+### Documentation
+
+* remove outdated documentation (3fcdf8a36b0b)
+
+### Chore
+
+* convert nightly to all (de97aea263da)
+* upgrade requirements.txt (54e71c950dfe)
+* upgrade baw (676d60d844e0)
+* privileged user is not required (e7887e23a8e7)
+
 ## v0.3.2 (2022-10-03)
 
 ### Fix
