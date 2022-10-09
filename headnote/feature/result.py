@@ -47,11 +47,8 @@ def judge_strategy(
 
     Sources/Concept:
 
-        - MovingFooter:                footer (first prio)
-        - Pages:                       footer (second prio)
-        - FixedFooter:      header and footer (third prio)
-        - Common:           header            (last prio)
-        - PlainMoving:
+        - Common:           header
+        - FixedFooter:      header and footer
 
     Args:
         results: lists of `groupme.footer.FooterHeaderDetectionStrategy`.result
