@@ -49,7 +49,9 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
     def result(self):
         headers = self.result_header()
         footers = self.result_footer()
-        result = CommonTextStrategy.merge_results(headers, footers)
+        content = CommonTextStrategy.merge_results(headers, footers)
+        result = iamraw.PageContentFooterHeaders(content=content)
+        result.__strategy__ = __name__
         return result
 
     def result_header(self):

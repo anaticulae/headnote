@@ -93,7 +93,9 @@ class FixedHeadnoteStrategy(headnote.strategy.HeadnoteDetectionStrategy):
             )
             footerheader.extend(extracted)
         footerheader = decide_multiple(footerheader)
-        return footerheader
+        result = iamraw.PageContentFooterHeaders(content=footerheader)
+        result.__strategy__ = __name__
+        return result
 
     def report(self) -> headnote.strategy.HeadnoteStrategyReport:
         pass
