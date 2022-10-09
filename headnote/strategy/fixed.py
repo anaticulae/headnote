@@ -181,10 +181,10 @@ def extract_page_footerheader(
                 diff_max=HORIZONTALS_MATCH_DIFF_MAX,
             )
             if refs:
+                end = top / textnavigator.height * (1 + HEADER_PARSING_TOL)
                 header = create_info_area(
                     top=texmex.START,
-                    bottom=utila.roundme(top / textnavigator.height *
-                                         (1 + HEADER_PARSING_TOL)),
+                    bottom=utila.roundme(end),
                     navigator=textnavigator,
                     refs=refs,
                 )
