@@ -128,5 +128,7 @@ def _bachelor111_footerheader():
             ptns,
         )
         footerheader.extend(extracted)
-    footerheader = headnote.strategy.remove_duplication(footerheader)
-    return footerheader
+    footerheader = headnote.strategy.fixed.decide_multiple(footerheader)
+    result = iamraw.PageContentFooterHeaders(content=footerheader)
+    result.__strategy__ = iamraw.PageContentFooterHeaders.__name__
+    return result
