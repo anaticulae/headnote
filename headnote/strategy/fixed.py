@@ -85,7 +85,7 @@ class FixedHeadnoteStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         footerheader = []
         for top, bottom in itertools.zip_longest(tops, bottoms):
             # look for every page if footer/header are present
-            extracted = extract_page_footerheader(
+            extracted = extract_page_header_footer(
                 horizontals=self.horizontals,
                 top=top,
                 bottom=bottom,
@@ -155,7 +155,7 @@ def extract_common_header(
     return top, bottom
 
 
-def extract_page_footerheader(
+def extract_page_header_footer(
     horizontals: iamraw.PagesWithHorizontalList,
     top: float,
     bottom: float,

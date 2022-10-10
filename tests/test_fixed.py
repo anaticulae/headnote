@@ -26,10 +26,10 @@ def test_docu027_extract_common_header():
     assert top < bottom
 
 
-def test_docu027_extract_page_footerheader():
+def test_docu027_extract_page_header_footer():
     horizontals, _, top, bottom, ptns = _docu027()
     top, bottom = top[0], bottom[0]
-    extracted = headnote.strategy.fixed.extract_page_footerheader(
+    extracted = headnote.strategy.fixed.extract_page_header_footer(
         horizontals,
         top,
         bottom,
@@ -50,7 +50,7 @@ def test_bachelor111page_extract_common_header():
 
 
 @utilatest.longrun
-def test_bachelor111page_extract_page_footerheader():
+def test_bachelor111page_extract_page_header_footer():
     """Use more than one group to detect all headers.
 
     There are ordered from biggest to smallest.
@@ -121,7 +121,7 @@ def _bachelor111_footerheader():
     horizontals, _, top, bottom, ptns = _bachelor111()
     footerheader = []
     for top, bottom in itertools.zip_longest(top, bottom):
-        extracted = headnote.strategy.fixed.extract_page_footerheader(
+        extracted = headnote.strategy.fixed.extract_page_header_footer(
             horizontals,
             top,
             bottom,
