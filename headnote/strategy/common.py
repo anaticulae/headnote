@@ -153,7 +153,7 @@ class PageExtension:
             # more instable.
             occurrence_min = HEADER_TEXT_OCCURENCE_TRYAGAIN_MIN
         # prepare data
-        with_box = utila.flatten(
+        with_box = utila.flat(
             self.cluster_prepare(
                 ptns,
                 occurrence_min=occurrence_min,
@@ -184,7 +184,7 @@ class PageExtension:
 
         Try to match extension items with already detected areas.
         """
-        valid = utila.flatten([list(cluster) for cluster in clusters])
+        valid = utila.flat([list(cluster) for cluster in clusters])
         potential = self.candidats(ptns=potential)
         result = []
         for page in potential:
@@ -438,7 +438,7 @@ def header_content(pagecontents, occurrence_min: int) -> set:
 def matches(base, current) -> float:  # pylint:disable=R0911
     x0, y0, x1, y1 = base[0]
     xx0, yy0, xx1, yy1 = current[0]
-    if utila.rectangle_inside(base[0], current[0]):
+    if utila.rect_inside(base[0], current[0]):
         return True
     if utila.norm(x0, y0, xx0, yy0) > 50.0:
         return False

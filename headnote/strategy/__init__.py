@@ -17,7 +17,6 @@ There are one different strategies:
 
 import abc
 import dataclasses
-import typing
 
 import iamraw
 import texmex
@@ -36,7 +35,7 @@ class HeadnoteDetectionStrategy(abc.ABC):
         horizontals: iamraw.PagesWithHorizontalList,
         ptns: texmex.PTNs,
     ):
-        assert isinstance(horizontals, typing.List), str(horizontals)
+        assert isinstance(horizontals, list), str(horizontals)
         self.horizontals = horizontals
         self.ptns = ptns
         self.post_init()

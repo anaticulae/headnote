@@ -21,7 +21,6 @@ Master of the art:
 """
 
 import itertools
-import typing
 
 import configo
 import iamraw
@@ -105,7 +104,7 @@ def extract_common_header(
     horizontals: iamraw.PagesWithHorizontalList,
     pageheight: int,
     max_group_count: int = 1,
-) -> typing.Tuple[int, int]:
+) -> tuple[int, int]:
     """Extract common footer and header based on horizontal lines.
 
     Args:
@@ -241,7 +240,7 @@ def create_info_area(
 
 
 def extract_inarea(
-    clusters: typing.List,
+    clusters: list,
     pageheight: int,
     upper_bound: float = texmex.START,
     lower_bound: float = texmex.END,

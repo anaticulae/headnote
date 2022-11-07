@@ -7,8 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import typing
-
 import configo
 import iamraw
 import utila
@@ -48,12 +46,12 @@ def assert_horizontal(bounding):
 
 
 def biggest_hlinecluster_in_area(
-    clusters: typing.List,
+    clusters: list,
     ymin: float,
     ymax: float,
     max_group_count: int = 1,  # pylint:disable=W0613
     min_group_size: int = 1,
-) -> typing.List[int]:
+) -> list[int]:
     """Determine cluster with maximal horizontal line count which fits
     in area between [ymin and ymax]. Return y-coordinate of cluster as a
     footer/header-border.
