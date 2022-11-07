@@ -56,14 +56,14 @@ def test_diss264_page0_40(td, mp):
         mp,
         pages='0:40',
     )
-    assert len(header) in (36, 37)
+    assert len(header) in {36, 37}
 
 
 @utilatest.longrun
 def test_diss264_all(td, mp):
     """Ensure to parse header of alternating pages correctly."""
     loaded = extract_header(power.DISS264_PDF, td, mp, '0:150')
-    assert len(loaded) in (46, 47)  # may change in the future
+    assert len(loaded) in {46, 47}  # may change in the future
 
 
 @utilatest.longrun
@@ -80,7 +80,7 @@ def test_under_line_master75(td, mp):
 @utilatest.longrun
 def test_master110(td, mp):
     loaded = extract_header(power.MASTER110_PDF, td, mp, '0:50')
-    assert len(loaded) in (13, 25)  # may change in the future
+    assert len(loaded) in {13, 25}  # may change in the future
 
 
 @utilatest.nightly
@@ -133,7 +133,7 @@ def test_diss172(td, mp):
         td,
         mp,
     )
-    assert len(loaded) in (147, 148, 152)  # NOT VALIDATED
+    assert len(loaded) in {147, 148, 152}  # NOT VALIDATED
 
 
 @utilatest.nightly
@@ -143,7 +143,7 @@ def test_diss144(td, mp):
         td,
         mp,
     )
-    assert len(loaded) in (140, 142)  # NOT VALIDATED
+    assert len(loaded) in {140, 142}  # NOT VALIDATED
 
 
 @utilatest.nightly

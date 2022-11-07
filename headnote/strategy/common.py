@@ -426,10 +426,10 @@ def header_content(pagecontents, occurrence_min: int) -> set:
     # HINT: if layout is better parsed page numbers are may not included
     maxdiff = 0.8  # TODO: HOLY VALUE
     counted = {
-        key: sum([
-            val for current, val in collected.items()
-            if utila.similar(expected=key, current=current, maxdiff=maxdiff)
-        ]) for key in collected.keys()
+        key: sum(
+            (val for current, val in collected.items()
+             if utila.similar(expected=key, current=current, maxdiff=maxdiff)))
+        for key in collected.keys()
     }
     valid = {key for key in collected.keys() if counted[key] >= occurrence_min}
     return valid
