@@ -50,9 +50,7 @@ pipeline {
             }
         }
         stage('release'){
-            when {
-                expression { return params.RELEASE }
-            }
+            when{expression{return params.RELEASE}}
             steps{
                 sh 'baw install && baw release && baw publish'
                 // TODO: GIT COMMIT?
