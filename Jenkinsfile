@@ -50,6 +50,11 @@ pipeline {
                 sh 'baw test all --cov --junit_xml=report.xml'
                 junit '**/report.xml'
             }
+            post{
+                failure{
+                    script{publish.resource_generated()}
+                }
+            }
         }
         stage('release'){
             when{expression{return params.RELEASE}}
