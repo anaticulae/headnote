@@ -38,10 +38,10 @@ OCCURRENCE_MIN = configo.HolyTable(items=(
     (50, 14),
     (100, 25),
 ))
-
-AREA_TOP = configo.HV_PERCENT_PLUS(default=15)
-
-AREA_BOTTOM = configo.HV_PERCENT_PLUS(default=75)
+# Distance from document top till header end
+AREA_TOP = configo.HV_PERCENT_PLUS(default=15, limit=40)
+# Minimal start of header
+AREA_BOTTOM = configo.HV_PERCENT_PLUS(default=75, limit=100)
 
 
 class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
