@@ -27,9 +27,13 @@ def parse(content: str):
         for strategy in strategies:
             parsed = strategy(item.text)
             if parsed:
+                parsed.box = tuple(item.bounding)
                 break
         if not parsed:
-            parsed: iamraw.RawText = iamraw.RawText(text=item.text.strip())
+            parsed: iamraw.RawText = iamraw.RawText(
+                text=item.text.strip(),
+                box=tuple(item.bounding),
+            )
         result.append(parsed)
     return result
 
