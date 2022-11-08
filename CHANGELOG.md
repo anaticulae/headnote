@@ -2,6 +2,32 @@
 
 Every noteable change is logged here.
 
+## v0.5.0 (2022-11-08)
+
+### Feature
+
+* detect invalid headnotes which are underlined text (dd24d4eaaa30)
+* add bounding (1ab4f4cb228b)
+* add limits and documentation to improve automated configuration (6b62fcc737e8)
+
+### Fix
+
+* adjust strategy name assignment (d75d5c860f38)
+
+### Documentation
+
+* adjust docs (99b595f90eaf)
+
+### Chore
+
+* extend test data generator (560089ac329b)
+* adjust requirements (fcc398169470)
+* store generated data if all fails (a93a4553ba83)
+* add pipe library (814b7fc4d4c2)
+* format file (2a5100fc00f6)
+* upgrade environment (e4a39b6a5935)
+* upgrade requirements.txt (4aee832c26aa)
+
 ## v0.4.0 (2022-10-09)
 
 ### Feature
