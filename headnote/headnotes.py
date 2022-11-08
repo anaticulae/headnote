@@ -38,7 +38,8 @@ def parse(content: str):
 def parse_rawtext(text: str):
     if text.count(utila.NEWLINE) <= 2:
         return None
-    return iamraw.RawText(text=text.strip())
+    result = iamraw.RawText(text=text.strip())
+    return result
 
 
 @utila.cacheme
@@ -46,7 +47,8 @@ def parse_pagenumber(text: str):
     text = text.strip()
     if not elements.ispagenumber(text):
         return None
-    return iamraw.PageInformation(value=text, raw=text)
+    result = iamraw.PageInformation(value=text, raw=text)
+    return result
 
 
 @utila.cacheme
@@ -76,4 +78,8 @@ def parse_title_contemporary(text: str) -> iamraw.HeaderTitle:
     if not elements.isheadline(text):
         return None
     title = text.strip().title()
-    return iamraw.HeaderTitle(title=title, raw=text)
+    result = iamraw.HeaderTitle(
+        title=title,
+        raw=text,
+    )
+    return result
