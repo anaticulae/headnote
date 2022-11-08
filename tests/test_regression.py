@@ -17,6 +17,7 @@ import tests
 
 
 def run_headnotes(td, mp, pages: str) -> iamraw.PageContentFooterHeaders:
+    utilatest.fixture_requires(power.BACHELOR063_PDF)
     source = power.link(power.BACHELOR063_PDF)
     cmd = f'-i {source} -o {td.tmpdir} --pages={pages}'
     tests.run(cmd, mp=mp)
@@ -25,7 +26,6 @@ def run_headnotes(td, mp, pages: str) -> iamraw.PageContentFooterHeaders:
     return loaded
 
 
-@utilatest.requires(power.BACHELOR063_PDF)
 def test_bachelor063_page1(td, mp):
     result = run_headnotes(td, mp, pages='0:10')
     selected = utila.select_page(result, page=1)
@@ -40,7 +40,6 @@ def test_bachelor063_page1(td, mp):
     assert 0.93 <= footer_y0 <= footer_y1 <= 1.0
 
 
-@utilatest.requires(power.BACHELOR063_PDF)
 def test_bachelor063_all(td, mp):
     result = run_headnotes(td, mp, pages='0:30')
     selected = utila.select_page(result, page=1)
