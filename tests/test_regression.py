@@ -9,6 +9,7 @@
 
 import iamraw
 import power
+import pytest
 import serializeraw
 import utila
 import utilatest
@@ -57,3 +58,16 @@ def test_bachelor063_all(td, mp):
     footer_y0 = selected.footer.begin
     footer_y1 = selected.footer.end
     assert 0.93 <= footer_y0 <= footer_y1 <= 1.0
+
+
+@pytest.mark.xfail(reason='improvement required')
+@utilatest.nightly
+def test_master193_no_headnotes(td, mp):
+    """The headlines on this document are underlined with a horizontals.
+
+    Therefore the headnote strategey detects them as headnotes which there
+    are not.
+    """
+    result = run_headnotes(power.MASTER193_PDF, td, mp)
+    headnotes = [item for item in result if item.header]
+    assert not headnotes
