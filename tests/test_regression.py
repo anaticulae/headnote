@@ -16,9 +16,14 @@ import utilatest
 import tests
 
 
-def run_headnotes(td, mp, pages: str) -> iamraw.PageContentFooterHeaders:
-    utilatest.fixture_requires(power.BACHELOR063_PDF)
-    source = power.link(power.BACHELOR063_PDF)
+def run_headnotes(
+    source,
+    td,
+    mp,
+    pages: str = ':',
+) -> iamraw.PageContentFooterHeaders:
+    utilatest.fixture_requires(source)
+    source = power.link(source)
     cmd = f'-i {source} -o {td.tmpdir} --pages={pages}'
     tests.run(cmd, mp=mp)
     path = iamraw.path.headnote_result(td.tmpdir)
@@ -27,7 +32,7 @@ def run_headnotes(td, mp, pages: str) -> iamraw.PageContentFooterHeaders:
 
 
 def test_bachelor063_page1(td, mp):
-    result = run_headnotes(td, mp, pages='0:10')
+    result = run_headnotes(power.BACHELOR063_PDF, td, mp, pages='0:10')
     selected = utila.select_page(result, page=1)
     # header
     header_y0 = selected.header.begin
@@ -41,7 +46,7 @@ def test_bachelor063_page1(td, mp):
 
 
 def test_bachelor063_all(td, mp):
-    result = run_headnotes(td, mp, pages='0:30')
+    result = run_headnotes(power.BACHELOR063_PDF, td, mp, pages='0:30')
     selected = utila.select_page(result, page=1)
     # header
     header_y0 = selected.header.begin
