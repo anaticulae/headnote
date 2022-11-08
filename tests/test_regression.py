@@ -9,7 +9,6 @@
 
 import iamraw
 import power
-import pytest
 import serializeraw
 import utila
 import utilatest
@@ -60,7 +59,6 @@ def test_bachelor063_all(td, mp):
     assert 0.93 <= footer_y0 <= footer_y1 <= 1.0
 
 
-@pytest.mark.xfail(reason='improvement required')
 @utilatest.nightly
 def test_master193_no_headnotes(td, mp):
     """The headlines on this document are underlined with a horizontals.

@@ -91,6 +91,7 @@ class FixedHeadnoteStrategy(headnote.strategy.HeadnoteDetectionStrategy):
                 ptns=self.ptns,
             )
             footerheader.extend(extracted)
+        footerheader = remove_header_underline_only(footerheader)
         footerheader = decide_multiple(footerheader)
         result = iamraw.PageContentFooterHeaders(content=footerheader)
         result.__strategy__ = FixedHeadnoteStrategy.__class__.__name__
@@ -260,6 +261,82 @@ def extract_inarea(
     if not result:
         return None
     return result
+
+
+# TODO: MAKE DOCU LENGTH DEPENDENT
+UNDERLINED_HEADNOTES_MIN = configo.HV_INT_PLUS(default=10)
+
+UNDERLINED_HEADNOTES_RATE = configo.HV_PERCENT_PLUS(default=50)
+
+UNDERLINED_HORIZONAL_MAX = configo.HV_INT_PLUS(default=450)
+
+UNDERLINED_DIFF_MAX = configo.HV_INT_PLUS(default=50)
+
+
+def remove_header_underline_only(items):
+    """Sometimes horizontals are used to underline headlines.
+
+    Therefore some underlined headlines are detected as headnotes. This
+    approach tries to detect this cases and remove them.
+    """
+    header = [item.header for item in items if item.header]
+    fail, count = count_invalid_headnotes(header)
+    if count < UNDERLINED_HEADNOTES_MIN:
+        return items
+    rate = utila.rate_rel(fail, count)
+    if fail < UNDERLINED_HEADNOTES_RATE:
+        return items
+    msg = f'remove FixedHeaderInfo; underlined headlines detected: {fail} {count} {rate}'
+    utila.log(msg)
+    for item in items:
+        if not item.header:
+            continue
+        if isinstance(item.header, iamraw.FixedHeaderInfo):
+            item.header = None
+    return items
+
+
+def count_invalid_headnotes(headers):
+    fail, count = 0, 0
+    for item in headers:
+        if not isinstance(item, iamraw.FixedHeaderInfo):
+            continue
+        count += 1
+        if not item.refs:
+            utila.debug(f'no refs: {item}')
+            continue
+        if len(item.refs) != 1:
+            continue
+        horizontal = utila.rect_height(item.refs[0]) < 5.0
+        if not horizontal:
+            # TODO: ADD ROTATED PAGES
+            continue
+        horizontal_width = utila.rect_width(item.refs[0])
+        if horizontal_width > UNDERLINED_HORIZONAL_MAX:
+            continue
+        text_width = header_text_width(item)
+        if not text_width:
+            continue
+        near = utila.near(
+            current=text_width,
+            expected=horizontal_width,
+            diff=UNDERLINED_DIFF_MAX,
+        )
+        if not near:
+            continue
+        fail += 1
+    return fail, count
+
+
+def header_text_width(item) -> int:
+    if item.title:
+        return utila.rect_width(item.title.box)
+    if item.undefined:
+        return utila.rect_width(item.undefined[0].box)
+    if item.images:
+        return utila.rect_width(item.images[0].box)
+    utila.log(f'unsupported: {item}')
+    return 0
 
 
 def decide_multiple(items):
