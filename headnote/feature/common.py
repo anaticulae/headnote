@@ -15,6 +15,7 @@ TODO:
 
 import serializeraw
 
+import headnote.feature
 import headnote.strategy.common
 import headnote.utils
 
@@ -39,6 +40,7 @@ def work(
         # fontheader,
         # fontcontent,
         pages=pages,
+        state=headnote.feature.VISIBLE,
     )
     ptns = headnote.utils.rotate_ifrequired(ptns)
     horizontals = headnote.utils.rotate_horizontals_ifrequired(
