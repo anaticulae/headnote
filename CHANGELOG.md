@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v0.5.1 (2022-11-11)
+
+### Fix
+
+* allow running headnote with cleanup (2a0672691142)
+
+### Chore
+
+* upgrade requirements.txt (192bbe665307)
+
 ## v0.5.0 (2022-11-08)
 
 ### Feature
