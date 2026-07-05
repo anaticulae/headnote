@@ -351,8 +351,8 @@ def decide_multiple(items):
     for item in items:
         try:
             cur = selected[item.page]
-            itemcount = len([it for it in [item.header, item.footer] if it])
-            currentcount = len([it for it in [cur.header, cur.footer] if it])
+            itemcount = len([it for it in (item.header, item.footer) if it])
+            currentcount = len([it for it in (cur.header, cur.footer) if it])
             if itemcount > currentcount:
                 # replace current result with better result
                 selected[item.page] = item
