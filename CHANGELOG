@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v1.0.2 (2026-07-05)
+
+### Chores
+
+- **resources**: Enable cleanup
+  ([`162f7c1`](https://github.com/anaticulae/headnote/commit/162f7c1be5788ebc48e3345775ab7c0814d43128))
+
+
 ## v1.0.1 (2026-07-05)
 
 ### Chores
