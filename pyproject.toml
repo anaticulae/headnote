@@ -44,6 +44,7 @@ dev = [
     "pdflog>=1.0.2,<2.0.0",
     "ibidem>=1.0.0,<2.0.0",
     "groupmes>=1.1.0,<2.0.0",
+    "mundare>=1.0.1,<2.0.0",
 ]
 
 [project.urls]
