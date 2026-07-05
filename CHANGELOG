@@ -1,6 +1,499 @@
 # CHANGELOG
 
 
+## v1.0.1 (2026-07-05)
+
+### Chores
+
+- **test**: Add missing secret
+  ([`ffd822d`](https://github.com/anaticulae/headnote/commit/ffd822da11781846cd6957a52446a2c42e1782f0))
+
+
 ## v1.0.0 (2026-07-05)
+
+### Chores
+
+- **github**: Add .github
+  ([`9e76cdb`](https://github.com/anaticulae/headnote/commit/9e76cdbdaa049811abb79a5cf7ef844ef7fa2ac1))
+
+- **pyproject**: Use modern layout
+  ([`eb91df2`](https://github.com/anaticulae/headnote/commit/eb91df23f54a03ebfd2c87c5b8703ba7eabae1a1))
+
+- **test**: Disable missing resources
+  ([`651f8f0`](https://github.com/anaticulae/headnote/commit/651f8f0cdb13cac6ed189746a4d3730965536d14))
+
+- **version**: Use dynamic version
+  ([`da1dc0d`](https://github.com/anaticulae/headnote/commit/da1dc0d3d327fbc83e4ea38076f2e0ec36551346))
+
+### Code Style
+
+- **common**: Format code
+  ([`32feea7`](https://github.com/anaticulae/headnote/commit/32feea7d8ebcce4809f93a15a02c50c88cf4d8f3))
+
+### Documentation
+
+- **refactor**: Adjust file names
+  ([`89bb5de`](https://github.com/anaticulae/headnote/commit/89bb5de3a159da7098732c293931e07951408478))
+
+### Refactoring
+
+- **fixed**: Solve linter warnings
+  ([`c5aa7af`](https://github.com/anaticulae/headnote/commit/c5aa7af1b2251cd0cbc2ce07b5e43833846b5cab))
+
+- **rename**: Adjust packages
+  ([`55d40c5`](https://github.com/anaticulae/headnote/commit/55d40c56165eedbd19e1e99e6a4e4e6d4d10affd))
+
+
+## v0.5.1 (2022-11-11)
+
+### Bug Fixes
+
+- **feature**: Allow running headnote with cleanup
+  ([`2a06726`](https://github.com/anaticulae/headnote/commit/2a06726911423603ac66c4b0c8f7955f4ee5100c))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`192bbe6`](https://github.com/anaticulae/headnote/commit/192bbe665307130eaa5159a7b0d025e2f89fe781))
+
+
+## v0.5.0 (2022-11-08)
+
+### Bug Fixes
+
+- **strategy**: Adjust strategy name assignment
+  ([`d75d5c8`](https://github.com/anaticulae/headnote/commit/d75d5c860f38fa1e566ce7b995702a1be82ba86c))
+
+### Chores
+
+- **Jenkins**: Add pipe library
+  ([`814b7fc`](https://github.com/anaticulae/headnote/commit/814b7fc4d4c208d1841634e4b8757eb483a14baa))
+
+- **Jenkins**: Format file
+  ([`2a5100f`](https://github.com/anaticulae/headnote/commit/2a5100fc00f64397e490a0d2e6dc36e8a02ae242))
+
+- **Jenkins**: Store generated data if all fails
+  ([`a93a455`](https://github.com/anaticulae/headnote/commit/a93a4553ba83c7c4d3e982fed65fdd4aab65f2fa))
+
+- **Jenkins**: Upgrade environment
+  ([`e4a39b6`](https://github.com/anaticulae/headnote/commit/e4a39b6a5935c81e5df0c6ac2c7482e12c3909a2))
+
+- **requirements**: Upgrade requirements.txt
+  ([`4aee832`](https://github.com/anaticulae/headnote/commit/4aee832c26aa7576f76d331d3419d2097f46d8b8))
+
+- **resources**: Adjust requirements
+  ([`fcc3981`](https://github.com/anaticulae/headnote/commit/fcc398169470a053005964d9fc53f4e6f212d143))
+
+- **resources**: Extend test data generator
+  ([`560089a`](https://github.com/anaticulae/headnote/commit/560089ac329b9ef49083e5ff11a893dd39eacb9e))
+
+### Documentation
+
+- **fixed**: Adjust docs
+  ([`99b595f`](https://github.com/anaticulae/headnote/commit/99b595f90eaf6485cd5606a4410501d07ac7215a))
+
+### Features
+
+- **common**: Add limits and documentation to improve automated configuration
+  ([`6b62fcc`](https://github.com/anaticulae/headnote/commit/6b62fcc737e81fbe9234527a37d2c9b5a636d2e2))
+
+- **fixed**: Detect invalid headnotes which are underlined text
+  ([`dd24d4e`](https://github.com/anaticulae/headnote/commit/dd24d4eaaa30acefa826c5f0fc648d93305ace73))
+
+- **headnotes**: Add bounding
+  ([`1ab4f4c`](https://github.com/anaticulae/headnote/commit/1ab4f4cb228be2bdb17d1c1e3335db258007bbe7))
+
+### Refactoring
+
+- **fixed**: Clarify naming
+  ([`f659bbb`](https://github.com/anaticulae/headnote/commit/f659bbb0dc8d67ab4913e512a14f2b62249fbbcf))
+
+- **headnote**: Clarify code
+  ([`c90c09f`](https://github.com/anaticulae/headnote/commit/c90c09f0c25e36b08759e25e02a1ef49289ff983))
+
+- **linter**: Solve linter warning
+  ([`2c4f89e`](https://github.com/anaticulae/headnote/commit/2c4f89e9da156838ae1671fdd6441372bfc26633))
+
+- **replace**: Automated replacement
+  ([`cd07485`](https://github.com/anaticulae/headnote/commit/cd07485dc1d1dd2d2f84f773bc56fbe6fd1cb894))
+
+### Testing
+
+- **fix**: Use correct multi judgement selector
+  ([`3524c21`](https://github.com/anaticulae/headnote/commit/3524c21a0e83b16340eb72b935a927a66b91d334))
+
+- **refactor**: Make code more reusable
+  ([`b9984b2`](https://github.com/anaticulae/headnote/commit/b9984b20783bcc87f16905dce8d009caecc90d4f))
+
+- **refactor**: Remove duplicated code
+  ([`39c1963`](https://github.com/anaticulae/headnote/commit/39c1963148ce0da8ad6d8c1b9828c0651437afeb))
+
+- **regression**: Do not detect master193 headnotes
+  ([`b56775f`](https://github.com/anaticulae/headnote/commit/b56775fe427410f2b5e61e023510c897d371360b))
+
+
+## v0.4.0 (2022-10-09)
+
+### Chores
+
+- **Jenkinsfile**: Convert nightly to all
+  ([`de97aea`](https://github.com/anaticulae/headnote/commit/de97aea263da703179894aabad6a3ac4073d8192))
+
+- **Jenkinsfile**: Privileged user is not required
+  ([`e7887e2`](https://github.com/anaticulae/headnote/commit/e7887e23a8e7a531d968069a8d77c402b5e07d06))
+
+- **Jenkinsfile**: Upgrade baw
+  ([`676d60d`](https://github.com/anaticulae/headnote/commit/676d60d844e081ff9560a824168d0d9fad34806d))
+
+- **requirements**: Upgrade requirements.txt
+  ([`54e71c9`](https://github.com/anaticulae/headnote/commit/54e71c950dfe13c6c8513021f36a238fd790db49))
+
+### Documentation
+
+- **fix**: Remove outdated documentation
+  ([`3fcdf8a`](https://github.com/anaticulae/headnote/commit/3fcdf8a36b0b238156fb6af42437da4267a8e97a))
+
+### Features
+
+- **fixed**: Add matched horizontals to fixed header
+  ([`6988203`](https://github.com/anaticulae/headnote/commit/69882039275117b3484ee445c25feb8f16e77656))
+
+- **horizontals**: Change return type to use matched result
+  ([`3cddf36`](https://github.com/anaticulae/headnote/commit/3cddf36e1c1165a70cf58b793bdcfa05a729dd11))
+
+- **strategy**: Serialize selected strategy
+  ([`e90731d`](https://github.com/anaticulae/headnote/commit/e90731d51e17479753e6ff018a2fce8d551c248b))
+
+### Refactoring
+
+- **fixed**: Clarify code
+  ([`615507c`](https://github.com/anaticulae/headnote/commit/615507c014eb68f90b05c61a57fd33f3116f0180))
+
+- **rename**: Clarify naming
+  ([`6d1f38c`](https://github.com/anaticulae/headnote/commit/6d1f38c01ee5ba2cbedac434affd94bb90802cba))
+
+- **result**: Skip earlier
+  ([`6811691`](https://github.com/anaticulae/headnote/commit/6811691899a227892279ff8051f1883ddbc3b127))
+
+### Testing
+
+- **validate**: Validate huge documents only on monday
+  ([`e536062`](https://github.com/anaticulae/headnote/commit/e536062e0e85f656f517e4b963a613cddc9eebb1))
+
+
+## v0.3.2 (2022-10-03)
+
+### Bug Fixes
+
+- **fixed**: Adjust footer info
+  ([`f62aeb9`](https://github.com/anaticulae/headnote/commit/f62aeb9946b580f5061acb73a877395f6150acf9))
+
+- **header**: Ensure correct dimension
+  ([`74d5daf`](https://github.com/anaticulae/headnote/commit/74d5dafdd0195b6a8c2ab3d67e9ca669178a9acd))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`8c4c7d2`](https://github.com/anaticulae/headnote/commit/8c4c7d22ab59311a479d0ee5971973483ed498af))
+
+- **resources**: Extend test data generator
+  ([`a1e1cb7`](https://github.com/anaticulae/headnote/commit/a1e1cb7c353e594de7ee73b76083e334df9b39a4))
+
+### Refactoring
+
+- **naming**: Shorten naming
+  ([`81a4a0f`](https://github.com/anaticulae/headnote/commit/81a4a0f0512359da46e01f6c21e93e9cc68c54bd))
+
+### Testing
+
+- **validation**: Add expected headnote
+  ([`8db2012`](https://github.com/anaticulae/headnote/commit/8db201205e161e157cdebef8fd46fec7cd399957))
+
+
+## v0.3.1 (2022-09-29)
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`dcc0df5`](https://github.com/anaticulae/headnote/commit/dcc0df5a321156a386eebbd2f159e7b548a5d4c4))
+
+
+## v0.3.0 (2022-09-29)
+
+### Bug Fixes
+
+- **common**: Introduce separate footer const
+  ([`2bb80dd`](https://github.com/anaticulae/headnote/commit/2bb80ddcfa2da6f96a0d7d9f806f1215916dd873))
+
+### Chores
+
+- **ci**: Add Jenkinsfile
+  ([`c89e0e1`](https://github.com/anaticulae/headnote/commit/c89e0e1d68ab4ad123f0d0c6ee19ad7ca82e006f))
+
+- **ci**: Increase worker count on CI
+  ([`78aea8a`](https://github.com/anaticulae/headnote/commit/78aea8a6782425602a04481c676f47f62c55d929))
+
+- **Jenkinsfile**: Add opengl for resource generator
+  ([`c939d55`](https://github.com/anaticulae/headnote/commit/c939d5548f45d48b49627b8bc6a23b4de3a4ca5d))
+
+- **Jenkinsfile**: Add separate generator step
+  ([`484f5a9`](https://github.com/anaticulae/headnote/commit/484f5a9de089a9b890a18e271c9496d62409c4bf))
+
+- **requirements**: Add missing dev requirement
+  ([`e340776`](https://github.com/anaticulae/headnote/commit/e340776e663d6a04b58161dc32cba0981e928a92))
+
+- **requirements**: Upgrade requirements.txt
+  ([`8a1f614`](https://github.com/anaticulae/headnote/commit/8a1f614050a9a948595d456d5b8b4519452ca559))
+
+- **requirements**: Upgrade requirements.txt
+  ([`f1c933e`](https://github.com/anaticulae/headnote/commit/f1c933ec7e7403fa48b10a0fb8cac493bac72d01))
+
+- **resources**: Add missing dev resource
+  ([`503b092`](https://github.com/anaticulae/headnote/commit/503b092c8988073436cb205f6c2ac6add9715774))
+
+### Code Style
+
+- **changelog**: Adjust header to automation tool
+  ([`2c6ca57`](https://github.com/anaticulae/headnote/commit/2c6ca57563b5d8a2838f34f76476bfe8ef61cc5f))
+
+### Documentation
+
+- **common**: Format docs
+  ([`6b8d5d1`](https://github.com/anaticulae/headnote/commit/6b8d5d1d0007d6ae62189453d6f11c4801c9d1bc))
+
+### Features
+
+- **common**: Add object oriented footer strategy
+  ([`25346d9`](https://github.com/anaticulae/headnote/commit/25346d92ff7dd4e695393ce0887b4daf3da60b00))
+
+- **common**: Connect common footer strategy
+  ([`ef73197`](https://github.com/anaticulae/headnote/commit/ef73197e1b24f0f7e1b82b053dec468296cbf020))
+
+- **common**: Connect object oriented strategy
+  ([`849aaee`](https://github.com/anaticulae/headnote/commit/849aaee06d256f264106b36878c2aac8d598bd74))
+
+- **common**: Convert to object oriented approach
+  ([`d61db1b`](https://github.com/anaticulae/headnote/commit/d61db1b596cbae9b9fba6cb95f6ea3809e8a9a47))
+
+- **common**: Move border determination into separate method
+  ([`e6c79dc`](https://github.com/anaticulae/headnote/commit/e6c79dc882742c6775cece17d4c175028bcd1d8e))
+
+### Refactoring
+
+- **common**: Clarify code
+  ([`d50c5b3`](https://github.com/anaticulae/headnote/commit/d50c5b3f7a42229da7c1c8706c6747fb07c93a45))
+
+- **common**: Improve naming
+  ([`947352f`](https://github.com/anaticulae/headnote/commit/947352fceb9ceb09cb66e87215a6db700214eaeb))
+
+- **common**: Remove default behavior
+  ([`3699f64`](https://github.com/anaticulae/headnote/commit/3699f64df7d24f3eafd79e78a3177c1b93762ec8))
+
+- **common**: Remove default behavior
+  ([`e6b399b`](https://github.com/anaticulae/headnote/commit/e6b399bdcc21883590593a1d3b687c540156c176))
+
+- **common**: Remove outdated code
+  ([`a28cd0f`](https://github.com/anaticulae/headnote/commit/a28cd0f7d717eb0b6bcc4fe91fd3f4a4a05ee4ff))
+
+### Testing
+
+- **baseline**: Adjust baseline
+  ([`b984a35`](https://github.com/anaticulae/headnote/commit/b984a35197720be46e3174ba65f11afb847b8b18))
+
+- **refactor**: Make test more robust
+  ([`6b5adb2`](https://github.com/anaticulae/headnote/commit/6b5adb20be7fa8ea507a6af45a0b452bef188d25))
+
+- **skip**: Skip non generated tests
+  ([`2ac17ee`](https://github.com/anaticulae/headnote/commit/2ac17eea2e977459edca8b20052d1a353c9bbd5f))
+
+
+## v0.2.1 (2022-08-03)
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`19937a6`](https://github.com/anaticulae/headnote/commit/19937a63df39b92384645c7a2fd619dab6c85d93))
+
+### Documentation
+
+- **common**: Extend interface documentation
+  ([`9a4bb0c`](https://github.com/anaticulae/headnote/commit/9a4bb0ceea4a32db3b1e7e7f53ce984fb12279f6))
+
+### Features
+
+- **headnotes**: Cache result
+  ([`bd13342`](https://github.com/anaticulae/headnote/commit/bd13342feb642a95407b4f84d47f354bba3670dd))
+
+### Refactoring
+
+- **common**: Do not strip twice
+  ([`5e290fb`](https://github.com/anaticulae/headnote/commit/5e290fb6ba67b68da49ab2d6595a120f25045513))
+
+- **common**: Improve naming
+  ([`5fa72e7`](https://github.com/anaticulae/headnote/commit/5fa72e75b6e67c04b49cec4008c59cf8b8fadb43))
+
+- **fixed**: Clarify code
+  ([`8556f7e`](https://github.com/anaticulae/headnote/commit/8556f7ee29ee0d90cc806311322ea3a94f7248a1))
+
+- **fixed**: Clarify code
+  ([`dc9d2c2`](https://github.com/anaticulae/headnote/commit/dc9d2c2d3dc363fa9f4227c50b4ecb91addf6c2b))
+
+- **fixed**: Simplify code
+  ([`50e032d`](https://github.com/anaticulae/headnote/commit/50e032d634e4c7654dc7ae52b9e54c091911b33e))
+
+- **headnotes**: Reduce complexity
+  ([`b24a1ef`](https://github.com/anaticulae/headnote/commit/b24a1efec4f13b98db08981bce8b734297040c82))
+
+- **likelihood**: Replace with utila code
+  ([`17f832a`](https://github.com/anaticulae/headnote/commit/17f832a76993eab53385ff86a88a61cfe92254ff))
+
+- **strategy**: Shorten naming
+  ([`5e870ad`](https://github.com/anaticulae/headnote/commit/5e870ad65e82ff15a2fbef2162e7eb8dff924afa))
+
+### Testing
+
+- **common**: Clarify purpose of test
+  ([`b7fc607`](https://github.com/anaticulae/headnote/commit/b7fc607447468d7a302e37d84b326a383dd3e05e))
+
+- **header**: Keep dev build fast
+  ([`925b939`](https://github.com/anaticulae/headnote/commit/925b9390f9d1c5bad185dd7f2ee94d8ccd8fa638))
+
+- **refactor**: Clarify code
+  ([`2c02949`](https://github.com/anaticulae/headnote/commit/2c02949936cf0d0821b41c975ba0090efad3549c))
+
+- **refactor**: Clarify path access
+  ([`58efb3b`](https://github.com/anaticulae/headnote/commit/58efb3b822b132d7d9f76621b43e3ab9a622104a))
+
+- **refactor**: Move method order
+  ([`14786d6`](https://github.com/anaticulae/headnote/commit/14786d608937afda8e85b41500708c789f4ee2d9))
+
+
+## v0.2.0 (2022-08-03)
+
+### Chores
+
+- **requirements**: Add pdfinfo
+  ([`15af2cb`](https://github.com/anaticulae/headnote/commit/15af2cbba359395e802408a693269c62d815bb07))
+
+- **requirements**: Require higher footnote
+  ([`0192aa9`](https://github.com/anaticulae/headnote/commit/0192aa93020bf70a652f2c6a2e08e27dc1fa9cc6))
+
+- **requirements**: Upgrade requirements.txt
+  ([`70464b6`](https://github.com/anaticulae/headnote/commit/70464b68a01d36928a39190b891653928aaac187))
+
+- **requirements**: Upgrade requirements.txt
+  ([`dcfdf06`](https://github.com/anaticulae/headnote/commit/dcfdf0668bb0fb0585a8d95cf0fac91144c73176))
+
+- **resources**: Extend test data generator
+  ([`ab64af5`](https://github.com/anaticulae/headnote/commit/ab64af5cc0be64f6fc37812fffc2abfa7d0d1eef))
+
+### Features
+
+- **common**: Add footer detector
+  ([`96e62b1`](https://github.com/anaticulae/headnote/commit/96e62b10d5ab8131951ede47ffb4be7cd3802fab))
+
+- **common**: Add missing common footer behavior
+  ([`78a34ce`](https://github.com/anaticulae/headnote/commit/78a34cec913ab0f61f433ba08bd9194bf7128c81))
+
+- **common**: Merge footer and header into a single result
+  ([`39c7106`](https://github.com/anaticulae/headnote/commit/39c71060f825d9221caf52353752ded2806b3c68))
+
+- **common**: Prepare common to detect footer
+  ([`bc0b376`](https://github.com/anaticulae/headnote/commit/bc0b37630b5a5edbf8799b6c6ac2e5414d178406))
+
+- **common**: Use improved footer data type
+  ([`6682966`](https://github.com/anaticulae/headnote/commit/668296676c2e0bf36be1474ba01b3a9e9224b31b))
+
+### Refactoring
+
+- **common**: Separate header strategy
+  ([`ecefe6e`](https://github.com/anaticulae/headnote/commit/ecefe6edbb389c0ba7e8a49846ae257f2c2feb71))
+
+- **fixed**: Clarify code
+  ([`36089e0`](https://github.com/anaticulae/headnote/commit/36089e05dae80250a516c6ddc413b9de9e6a4ca2))
+
+### Testing
+
+- **baseline**: Adjust baseline
+  ([`06b2ebb`](https://github.com/anaticulae/headnote/commit/06b2ebb753f81340b243b6dcc629b72b7433d8c0))
+
+- **enable**: Enable xpassed test
+  ([`5d18e77`](https://github.com/anaticulae/headnote/commit/5d18e771a3715d14c79f5744e5f6781260595272))
+
+- **validate**: Adjust footer/header validator
+  ([`9a88f36`](https://github.com/anaticulae/headnote/commit/9a88f36762cfc851ced63b137e77943db6edcbc7))
+
+
+## v0.1.1 (2022-07-30)
+
+### Features
+
+- **cli**: Enable multiprocessing
+  ([`4479ecc`](https://github.com/anaticulae/headnote/commit/4479ecc08dca11be160d016ea278b91bd6a9430a))
+
+### Refactoring
+
+- **remove**: Remove unused code
+  ([`244c823`](https://github.com/anaticulae/headnote/commit/244c8239afcf06c326f25a084ebf787af012fabc))
+
+### Testing
+
+- **validate**: Validate all resources
+  ([`6845068`](https://github.com/anaticulae/headnote/commit/6845068ad3484ba9420b7f90082ce8028beda849))
+
+
+## v0.1.0 (2022-07-29)
+
+### Bug Fixes
+
+- **common**: Rotate horizontals if required
+  ([`72305b4`](https://github.com/anaticulae/headnote/commit/72305b41931b716a6d8a34eff1ac0a5d9f09a545))
+
+### Chores
+
+- **requirements**: Move requirements
+  ([`5891bf9`](https://github.com/anaticulae/headnote/commit/5891bf924569c5943539277b016f6935b00eaea6))
+
+- **resources**: Extend test data generator
+  ([`21e8ec5`](https://github.com/anaticulae/headnote/commit/21e8ec5beb5efc6284052102578ad77c807d7074))
+
+### Features
+
+- **cli**: Connect fixed step
+  ([`7c393db`](https://github.com/anaticulae/headnote/commit/7c393db2391ed04a32f62aacaa198a7a51e67a0c))
+
+- **fixed**: Move from groupme
+  ([`9b94385`](https://github.com/anaticulae/headnote/commit/9b943856afc0b46000b25ba35bcfc53b0c0b42f8))
+
+- **move**: Move code from groupme
+  ([`76f33a4`](https://github.com/anaticulae/headnote/commit/76f33a431e937389ca496f5561656b97cc18b767))
+
+- **result**: Move result judger
+  ([`b4821bc`](https://github.com/anaticulae/headnote/commit/b4821bc9ccd40e6a61f25e503e1ed0e48269c467))
+
+### Refactoring
+
+- **result**: Move extraction validation step
+  ([`afa5301`](https://github.com/anaticulae/headnote/commit/afa5301af996c7b25e247e837efc54607b60824f))
+
+- **strategy**: Move common into strategy package
+  ([`9b64b3b`](https://github.com/anaticulae/headnote/commit/9b64b3bdc505938b0b170a87bac7edfef2d6beea))
+
+### Testing
+
+- **adjust**: Adjust unit tests
+  ([`1d50670`](https://github.com/anaticulae/headnote/commit/1d506707ee63967493433c741128c84a3d287016))
+
+- **baseline**: Adjust baseline
+  ([`c9dc07d`](https://github.com/anaticulae/headnote/commit/c9dc07d320f7f61409de928585c1f864b6d79451))
+
+- **fixed**: Adjust unit test
+  ([`80744d1`](https://github.com/anaticulae/headnote/commit/80744d1d526328287d8ff0f6d5cf3a87fd839e21))
+
+- **move**: Move tests from groupme
+  ([`ec4d81e`](https://github.com/anaticulae/headnote/commit/ec4d81e81a0387adb4acf11c6fb8901e72b7c922))
+
+
+## v0.0.0 (2022-07-29)
 
 - Initial Release
