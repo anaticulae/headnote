@@ -67,7 +67,7 @@ RAWMAKER = '--text --line --horizontals ' + gennex.CONFIG
 def extract(resources):
     gennex.extract(
         resources,
-        # cleanup=True,
+        cleanup=True,
         oneline=None,
         pagenumber=True,
         footnote=True,
