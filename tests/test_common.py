@@ -7,15 +7,15 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import hoverpower
 import iamraw
-import power
 import serializeraw
-import utilatest
+import utilotest
 
 import tests
 
 
-@utilatest.requires(power.BACHELOR037_PDF)
+@utilotest.requires(hoverpower.BACHELOR037_PDF)
 def test_footer_regression_common_strategy(td, mp):
     """There was a bug in handling selective --pages=1 correctly.
 
@@ -24,7 +24,7 @@ def test_footer_regression_common_strategy(td, mp):
     access error.
     """
     root = td.tmpdir
-    source = power.link(power.BACHELOR037_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR037_PDF)
     page = 1
     cmd = f'-i {source} -o {root} --pages=0:10'
     tests.run(cmd, mp=mp)

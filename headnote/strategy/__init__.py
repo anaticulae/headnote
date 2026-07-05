@@ -20,7 +20,7 @@ import dataclasses
 
 import iamraw
 import texmex
-import utila
+import utilo
 
 
 @dataclasses.dataclass  # pylint:disable=R0903
@@ -61,7 +61,7 @@ class HeadnoteDetectionStrategy(abc.ABC):
             pageheight if pageheight exists
             None if pageheight not exists
         """
-        selected = utila.select_page(self.ptns, page)
+        selected = utilo.select_page(self.ptns, page)
         if selected is None:
             return None
         pageheight = selected.height

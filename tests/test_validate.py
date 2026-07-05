@@ -9,35 +9,35 @@
 
 import functools
 
+import hoverpower
 import iamraw
-import power
 import pytest
 import serializeraw
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import headnote
 import tests
 
-ARCHIVE = utila.join(headnote.ROOT, 'tests/expected', exist=True)
+ARCHIVE = utilo.join(headnote.ROOT, 'tests/expected', exist=True)
 
 
 def monday(item):
     if item in {
-            power.DISS143_PDF,
-            power.DISS144_PDF,
-            power.HC_DISS171,
-            power.HC_DISS193,
+            hoverpower.DISS143_PDF,
+            hoverpower.DISS144_PDF,
+            hoverpower.HC_DISS171,
+            hoverpower.HC_DISS193,
     }:
-        return utilatest.monday
+        return utilotest.monday
     return None
 
 
 @pytest.mark.parametrize(
     'source',
-    utilatest.test_resources(tests.conftest.RESOURCES, marker=monday),
+    utilotest.test_resources(tests.conftest.RESOURCES, marker=monday),
 )
-@utilatest.nightly
+@utilotest.nightly
 def test_validate(source, td, mp):
     Evaluate(
         source=source,
@@ -46,14 +46,14 @@ def test_validate(source, td, mp):
     ).evaluate()
 
 
-class Evaluate(utilatest.BaseLiner):
+class Evaluate(utilotest.BaseLiner):
 
     def __init__(self, source, workdir, mp):
         super().__init__(
             program=functools.partial(tests.run, mp=mp),
             step='',
             pages=':',
-            source=power.link(source),
+            source=hoverpower.link(source),
             workdir=workdir,
             archive=ARCHIVE,
             loader=self.load_footnotes,
@@ -74,7 +74,7 @@ class Evaluate(utilatest.BaseLiner):
                 headers.append(rendered)
         # remove empty items
         headers = [item for item in headers if item]
-        result = utila.NEWLINE.join(headers)
+        result = utilo.NEWLINE.join(headers)
         return result
 
 

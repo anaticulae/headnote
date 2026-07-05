@@ -11,7 +11,7 @@ import collections
 
 import iamraw
 import serializeraw
-import utila
+import utilo
 
 
 def work(
@@ -60,7 +60,7 @@ def judge_strategy(
     for pagenumber, (
             common,
             fixed,
-    ) in utila.sync_pages(results):
+    ) in utilo.sync_pages(results):
         header = fixed.header if fixed else None
         footer = fixed.footer if fixed else None
         footer_best = 'fixed' if fixed else None
@@ -84,7 +84,7 @@ def judge_strategy(
             continue
         # log footer best
         if footer_best:
-            utila.verbose(f'footer: {pagenumber} {footer_best}')
+            utilo.verbose(f'footer: {pagenumber} {footer_best}')
         current = iamraw.PageContentFooterHeader(
             header=header,
             footer=footer,
@@ -93,7 +93,7 @@ def judge_strategy(
         result.append(current)
     validate(result)
     page_order = [item.page for item in result]
-    assert utila.isascending(page_order), page_order
+    assert utilo.isascending(page_order), page_order
     return result
 
 
@@ -103,7 +103,7 @@ def quality(results: list) -> tuple:
     pages = set()
     # count result for every strategy
     counter = collections.defaultdict(int)
-    for pagenumber, data in utila.sync_pages(results):
+    for pagenumber, data in utilo.sync_pages(results):
         pages.add(pagenumber)
         for index, item in enumerate(data):
             if not item:
@@ -134,4 +134,4 @@ def validate(items: list):
             continue
         msg.append(f'duplicated page: {page} ({value})')
     if msg:
-        raise ValueError(utila.NEWLINE.join(msg))
+        raise ValueError(utilo.NEWLINE.join(msg))

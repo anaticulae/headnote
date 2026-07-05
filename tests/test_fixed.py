@@ -9,11 +9,11 @@
 
 import itertools
 
+import hoverpower
 import iamraw
-import power
 import serializeraw
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import headnote.strategy
 import headnote.strategy.fixed
@@ -38,10 +38,10 @@ def test_docu027_extract_page_header_footer():
     allfooter = [
         item.footer is not None for item in extracted if item.page >= 2
     ]
-    assert all(allfooter), utila.log_raw(allfooter)
+    assert all(allfooter), utilo.log_raw(allfooter)
 
 
-@utilatest.longrun
+@utilotest.longrun
 def test_bachelor111page_extract_common_header():
     _, __, top, bottom, ___ = _bachelor111()
     assert top  # document has header
@@ -49,7 +49,7 @@ def test_bachelor111page_extract_common_header():
     assert top < bottom
 
 
-@utilatest.longrun
+@utilotest.longrun
 def test_bachelor111page_extract_page_header_footer():
     """Use more than one group to detect all headers.
 
@@ -61,14 +61,14 @@ def test_bachelor111page_extract_page_header_footer():
     assert len(footerheader) < bachelor111pagecount, msg
 
     header = [item.header for item in footerheader if item.header]
-    assert len(header) == 94, utila.log_raw(header)
+    assert len(header) == 94, utilo.log_raw(header)
 
     # assert that strategy detect no invalid fixed footer
     footer = [item.footer for item in footerheader if item.footer]
-    assert not footer, utila.log_raw(footer)
+    assert not footer, utilo.log_raw(footer)
 
 
-@utilatest.longrun
+@utilotest.longrun
 def test_bachelor111page_extract_page_header():
     footerheader = _bachelor111_footerheader()
     pages = [item.page for item in footerheader]
@@ -81,7 +81,7 @@ def test_bachelor111page_extract_page_header():
     assert len(title) >= 68, 'not enough title'
 
 
-@utilatest.longrun
+@utilotest.longrun
 def test_footer_dump_and_load_bachelor111():
     footerheader = _bachelor111_footerheader()
     dumped = serializeraw.dump_headerfooter(footerheader)
@@ -90,8 +90,8 @@ def test_footer_dump_and_load_bachelor111():
 
 
 def _docu027():
-    utilatest.fixture_requires(power.DOCU027_PDF)
-    source = power.link(power.DOCU027_PDF)
+    utilotest.fixture_requires(hoverpower.DOCU027_PDF)
+    source = hoverpower.link(hoverpower.DOCU027_PDF)
     horizontals = iamraw.path.horizontals(source)
     horizontals = serializeraw.load_horizontals(horizontals)
     navigators = serializeraw.ptn_frompath(source)
@@ -104,8 +104,8 @@ def _docu027():
 
 
 def _bachelor111():
-    utilatest.fixture_requires(power.BACHELOR111_PDF)
-    source = power.link(power.BACHELOR111_PDF)
+    utilotest.fixture_requires(hoverpower.BACHELOR111_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR111_PDF)
     horizontals = iamraw.path.horizontals(source)
     horizontals = serializeraw.load_horizontals(horizontals)
     navigators = serializeraw.ptn_frompath(source)

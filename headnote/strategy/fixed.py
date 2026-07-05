@@ -22,10 +22,10 @@ Master of the art:
 
 import itertools
 
-import configo
+import configos
 import iamraw
 import texmex
-import utila
+import utilo
 
 import headnote.headnotes
 import headnote.horizontals
@@ -34,26 +34,26 @@ import headnote.strategy
 NO_CLUSTER = [texmex.START], [texmex.END] # yapf:disable
 
 # max difference between left and right y-coordinate
-COMMON_HORIZONTAL_CLASSIFIER_ERROR_MAX = configo.HV_FLOAT_PLUS(default=2.0)
+COMMON_HORIZONTAL_CLASSIFIER_ERROR_MAX = configos.HV_FLOAT_PLUS(default=2.0)
 
 # minimal horizontal line count in cluster to avoid low item cluster
-CLUSTER_SIZE_MIN = configo.HV_INT_PLUS(default=10)
+CLUSTER_SIZE_MIN = configos.HV_INT_PLUS(default=10)
 
 # maximal count of different header/footer areas
-FOOTERHEADER_AREA_COUNT_MAX = configo.HV_INT_PLUS(default=5)
+FOOTERHEADER_AREA_COUNT_MAX = configos.HV_INT_PLUS(default=5)
 
 # maximal distance from page top in percent where header can be detected
-HEADER_SIZE_MAX = configo.HV_PERCENT_PLUS(default=15, limit=100)
+HEADER_SIZE_MAX = configos.HV_PERCENT_PLUS(default=15, limit=100)
 
 # maximal distance from page bottom in percent where footer can be detected
-FOOTER_SIZE_MAX = configo.HV_PERCENT_PLUS(default=20, limit=100)
+FOOTER_SIZE_MAX = configos.HV_PERCENT_PLUS(default=20, limit=100)
 
-HORIZONTALS_MATCH_DIFF_MAX = configo.HV_INT_PLUS(default=10)
+HORIZONTALS_MATCH_DIFF_MAX = configos.HV_INT_PLUS(default=10)
 
 # 10% percent cause of bad font-bounding-boxing
-HEADER_PARSING_TOL = configo.HV_PERCENT_PLUS(default=10, limit=25)
+HEADER_PARSING_TOL = configos.HV_PERCENT_PLUS(default=10, limit=25)
 # TODO: PRECENT_MINUS
-FOOTER_PARSING_TOL = configo.HV_PERCENT_PLUS(default=0, limit=25)
+FOOTER_PARSING_TOL = configos.HV_PERCENT_PLUS(default=0, limit=25)
 
 
 class FixedHeadnoteStrategy(headnote.strategy.HeadnoteDetectionStrategy):
@@ -124,7 +124,7 @@ def extract_common_header(
     # documents with alternating left right pages the horizonal lines
     # alternates also. Therefore we have only check the y-direction
     # instead of the whole line.
-    clusters = utila.same_line_cluster(
+    clusters = utilo.same_line_cluster(
         todo=bounding,
         max_diff=COMMON_HORIZONTAL_CLASSIFIER_ERROR_MAX,
     )
@@ -174,7 +174,7 @@ def extract_page_header_footer(
     """
     result = []
     for page in horizontals:
-        textnavigator = utila.select_page(ptns, page.page)
+        textnavigator = utilo.select_page(ptns, page.page)
         header = None
         if top is not None:
             refs = headnote.horizontals.match(
@@ -186,7 +186,7 @@ def extract_page_header_footer(
                 end = top / textnavigator.height * (1 + HEADER_PARSING_TOL)
                 header = create_info_area(
                     top=texmex.START,
-                    bottom=utila.roundme(end),
+                    bottom=utilo.roundme(end),
                     navigator=textnavigator,
                     refs=refs,
                 )
@@ -200,7 +200,7 @@ def extract_page_header_footer(
             if refs:
                 start = bottom / textnavigator.height * (1 + FOOTER_PARSING_TOL)
                 footer = create_info_area(
-                    top=utila.roundme(start),
+                    top=utilo.roundme(start),
                     bottom=texmex.END,
                     navigator=textnavigator,
                     ctor=iamraw.FixedFooterInfo,
@@ -248,7 +248,7 @@ def extract_inarea(
     max_group_count: int = 1,
     min_group_size: int = CLUSTER_SIZE_MIN,
 ) -> float:
-    """Determine all elements in the potential footer/header area."""
+    """Determine all elementae in the potential footer/header area."""
     ymin = pageheight * upper_bound
     ymax = pageheight * lower_bound
     result = headnote.horizontals.biggest_hlinecluster_in_area(
@@ -264,13 +264,13 @@ def extract_inarea(
 
 
 # TODO: MAKE DOCU LENGTH DEPENDENT
-UNDERLINED_HEADNOTES_MIN = configo.HV_INT_PLUS(default=10)
+UNDERLINED_HEADNOTES_MIN = configos.HV_INT_PLUS(default=10)
 
-UNDERLINED_HEADNOTES_RATE = configo.HV_PERCENT_PLUS(default=50)
+UNDERLINED_HEADNOTES_RATE = configos.HV_PERCENT_PLUS(default=50)
 
-UNDERLINED_HORIZONAL_MAX = configo.HV_INT_PLUS(default=450)
+UNDERLINED_HORIZONAL_MAX = configos.HV_INT_PLUS(default=450)
 
-UNDERLINED_DIFF_MAX = configo.HV_INT_PLUS(default=50)
+UNDERLINED_DIFF_MAX = configos.HV_INT_PLUS(default=50)
 
 
 def remove_header_underline_only(items):
@@ -283,11 +283,11 @@ def remove_header_underline_only(items):
     fail, count = count_invalid_headnotes(header)
     if count < UNDERLINED_HEADNOTES_MIN:
         return items
-    rate = utila.rate_rel(fail, count)
+    rate = utilo.rate_rel(fail, count)
     if fail < UNDERLINED_HEADNOTES_RATE:
         return items
     msg = f'remove FixedHeaderInfo; underlined headlines detected: {fail} {count} {rate}'
-    utila.log(msg)
+    utilo.log(msg)
     for item in items:
         if not item.header:
             continue
@@ -303,21 +303,21 @@ def count_invalid_headnotes(headers):
             continue
         count += 1
         if not item.refs:
-            utila.debug(f'no refs: {item}')
+            utilo.debug(f'no refs: {item}')
             continue
         if len(item.refs) != 1:
             continue
-        horizontal = utila.rect_height(item.refs[0]) < 5.0
+        horizontal = utilo.rect_height(item.refs[0]) < 5.0
         if not horizontal:
             # TODO: ADD ROTATED PAGES
             continue
-        horizontal_width = utila.rect_width(item.refs[0])
+        horizontal_width = utilo.rect_width(item.refs[0])
         if horizontal_width > UNDERLINED_HORIZONAL_MAX:
             continue
         text_width = header_text_width(item)
         if not text_width:
             continue
-        near = utila.near(
+        near = utilo.near(
             current=text_width,
             expected=horizontal_width,
             diff=UNDERLINED_DIFF_MAX,
@@ -330,12 +330,12 @@ def count_invalid_headnotes(headers):
 
 def header_text_width(item) -> int:
     if item.title:
-        return utila.rect_width(item.title.box)
+        return utilo.rect_width(item.title.box)
     if item.undefined:
-        return utila.rect_width(item.undefined[0].box)
+        return utilo.rect_width(item.undefined[0].box)
     if item.images:
-        return utila.rect_width(item.images[0].box)
-    utila.log(f'unsupported: {item}')
+        return utilo.rect_width(item.images[0].box)
+    utilo.log(f'unsupported: {item}')
     return 0
 
 

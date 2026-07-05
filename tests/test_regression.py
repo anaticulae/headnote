@@ -7,11 +7,11 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import hoverpower
 import iamraw
-import power
 import serializeraw
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import tests
 
@@ -22,8 +22,8 @@ def run_headnotes(
     mp,
     pages: str = ':',
 ) -> iamraw.PageContentFooterHeaders:
-    utilatest.fixture_requires(source)
-    source = power.link(source)
+    utilotest.fixture_requires(source)
+    source = hoverpower.link(source)
     cmd = f'-i {source} -o {td.tmpdir} --pages={pages}'
     tests.run(cmd, mp=mp)
     path = iamraw.path.headnote_result(td.tmpdir)
@@ -32,8 +32,8 @@ def run_headnotes(
 
 
 def test_bachelor063_page1(td, mp):
-    result = run_headnotes(power.BACHELOR063_PDF, td, mp, pages='0:10')
-    selected = utila.select_page(result, page=1)
+    result = run_headnotes(hoverpower.BACHELOR063_PDF, td, mp, pages='0:10')
+    selected = utilo.select_page(result, page=1)
     # header
     header_y0 = selected.header.begin
     header_y1 = selected.header.end
@@ -46,8 +46,8 @@ def test_bachelor063_page1(td, mp):
 
 
 def test_bachelor063_all(td, mp):
-    result = run_headnotes(power.BACHELOR063_PDF, td, mp, pages='0:30')
-    selected = utila.select_page(result, page=1)
+    result = run_headnotes(hoverpower.BACHELOR063_PDF, td, mp, pages='0:30')
+    selected = utilo.select_page(result, page=1)
     # header
     header_y0 = selected.header.begin
     header_y1 = selected.header.end
@@ -59,13 +59,13 @@ def test_bachelor063_all(td, mp):
     assert 0.93 <= footer_y0 <= footer_y1 <= 1.0
 
 
-@utilatest.nightly
+@utilotest.nightly
 def test_master193_no_headnotes(td, mp):
     """The headlines on this document are underlined with a horizontals.
 
     Therefore the headnote strategey detects them as headnotes which there
     are not.
     """
-    result = run_headnotes(power.MASTER193_PDF, td, mp)
+    result = run_headnotes(hoverpower.MASTER193_PDF, td, mp)
     headnotes = [item for item in result if item.header]
     assert not headnotes

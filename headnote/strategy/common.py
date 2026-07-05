@@ -19,18 +19,18 @@ text and images. There is no horizontal line required.
 import collections
 import math
 
-import configo
-import elements
+import configos
+import elementae
 import iamraw
 import texmex
-import utila
+import utilo
 
 import headnote.headnotes
 import headnote.strategy
 
-COMMON_HEADER_ERROR_MAX = configo.HV_FLOAT_PLUS(default=10.0)
+COMMON_HEADER_ERROR_MAX = configos.HV_FLOAT_PLUS(default=10.0)
 # minimal items in a cluster to be detected and accepted as feature.
-OCCURRENCE_MIN = configo.HolyTable(items=(
+OCCURRENCE_MIN = configos.HolyTable(items=(
     (0, 5),
     (10, 5),
     (15, 8),
@@ -39,9 +39,9 @@ OCCURRENCE_MIN = configo.HolyTable(items=(
     (100, 25),
 ))
 # Distance from document top till header end
-AREA_TOP = configo.HV_PERCENT_PLUS(default=15, limit=40)
+AREA_TOP = configos.HV_PERCENT_PLUS(default=15, limit=40)
 # Minimal start of header
-AREA_BOTTOM = configo.HV_PERCENT_PLUS(default=75, limit=100)
+AREA_BOTTOM = configos.HV_PERCENT_PLUS(default=75, limit=100)
 
 
 class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
@@ -85,7 +85,7 @@ class CommonTextStrategy(headnote.strategy.HeadnoteDetectionStrategy):
         return result
 
 
-HEADER_TEXT_OCCURENCE_MIN = configo.HV_INT_PLUS(default=5)
+HEADER_TEXT_OCCURENCE_MIN = configos.HV_INT_PLUS(default=5)
 
 
 class PageExtension:
@@ -153,7 +153,7 @@ class PageExtension:
             # more instable.
             occurrence_min = HEADER_TEXT_OCCURENCE_TRYAGAIN_MIN
         # prepare data
-        with_box = utila.flat(
+        with_box = utilo.flat(
             self.cluster_prepare(
                 ptns,
                 occurrence_min=occurrence_min,
@@ -162,10 +162,10 @@ class PageExtension:
         cluster_length_min = OCCURRENCE_MIN(page_count)
         # TODO: REMOVE LATER, SWITCH TABLE BASED ENTROPY OF POTENTIAL HEADER AREA?
         cluster_length_min = 5
-        clusters = utila.three_side_equal_cluster(  # pylint:disable=E1123
+        clusters = utilo.three_side_equal_cluster(  # pylint:disable=E1123
             todo=with_box,
             max_diff=COMMON_HEADER_ERROR_MAX,
-            min_elements=cluster_length_min,
+            min_elementae=cluster_length_min,
         )
         if not clusters:
             return None
@@ -184,7 +184,7 @@ class PageExtension:
 
         Try to match extension items with already detected areas.
         """
-        valid = utila.flat([list(cluster) for cluster in clusters])
+        valid = utilo.flat([list(cluster) for cluster in clusters])
         potential = self.candidats(ptns=potential)
         result = []
         for page in potential:
@@ -233,7 +233,7 @@ class PageExtension:
 
     def determine_border(self, bounding, pageheight) -> float:  # pylint:disable=R0201
         end = bounding.y1 / pageheight
-        end = utila.roundme(end + HEADER_TOL)
+        end = utilo.roundme(end + HEADER_TOL)
         return end
 
     def create(  # pylint:disable=R0201
@@ -284,7 +284,7 @@ class PageExtension:
         headercount = len([it for it in headers if it.header or it.footer])
         required = HEADER_OCCURRENCE_MIN(pagecount)
         if headercount < required:
-            utila.debug(f'disable header common too few header: {headercount} '
+            utilo.debug(f'disable header common too few header: {headercount} '
                         f'pages: {pagecount} required: {required}')
             return []
         return headers
@@ -297,7 +297,7 @@ class PageExtensionFooter(PageExtension):
 
     def determine_border(self, bounding, pageheight) -> float:  # pylint:disable=R0201
         end = bounding.y0 / pageheight
-        end = utila.roundme(end + FOOTER_TOL)
+        end = utilo.roundme(end + FOOTER_TOL)
         return end
 
     def create_ctor(self, border: float, pagenumber: int):  # pylint:disable=R0201
@@ -322,7 +322,7 @@ class PageExtensionFooter(PageExtension):
         return page.after(AREA_BOTTOM)
 
 
-HEADER_OCCURRENCE_MIN = configo.HolyTable(items=(
+HEADER_OCCURRENCE_MIN = configos.HolyTable(items=(
     (0, 5),
     (10, 4),
     (15, 7),
@@ -350,9 +350,9 @@ def best(*items):
 
 
 # count holes in [20%,80%]
-COUNT_EMPTY_DOCUMENT_PAGE_START = configo.HV_PERCENT_PLUS(default=20)
+COUNT_EMPTY_DOCUMENT_PAGE_START = configos.HV_PERCENT_PLUS(default=20)
 
-COUNT_EMPTY_DOCUMENT_PAGE_END = configo.HV_PERCENT_PLUS(default=80)
+COUNT_EMPTY_DOCUMENT_PAGE_END = configos.HV_PERCENT_PLUS(default=80)
 
 
 def count_empty(collected) -> int:
@@ -371,21 +371,21 @@ def count_empty(collected) -> int:
 
 
 # plus 1 percent off to ensure that content and header is separated correctly.
-HEADER_TOL = configo.HV_FLOAT_PLUS(default=0.01)
+HEADER_TOL = configos.HV_FLOAT_PLUS(default=0.01)
 
-FOOTER_TOL = configo.HV_FLOAT_PLUS(default=0.00)
+FOOTER_TOL = configos.HV_FLOAT_PLUS(default=0.00)
 
-HEADER_TEXT_OCCURENCE_TRYAGAIN_MIN = configo.HV_INT_PLUS(default=3)
+HEADER_TEXT_OCCURENCE_TRYAGAIN_MIN = configos.HV_INT_PLUS(default=3)
 
 
 def valid_line(text: str, valid: set) -> bool:
     """Remove small text token trash.
 
-    Skip very short elements:
+    Skip very short elementae:
     >>> assert not valid_line('-', valid={})
     """
     text = text.strip()
-    if elements.ispagenumber(text):
+    if elementae.ispagenumber(text):
         # TODO: ALREADY REMOVED IN PAGENUMBER APPLICATION
         return True
     if len(text) <= 3:
@@ -395,7 +395,7 @@ def valid_line(text: str, valid: set) -> bool:
     return False
 
 
-HEADER_TEXT_SIZE_MAX = configo.HV_FLOAT_PLUS(default=13.9)
+HEADER_TEXT_SIZE_MAX = configos.HV_FLOAT_PLUS(default=13.9)
 
 
 def noheader_content(item) -> bool:
@@ -427,7 +427,7 @@ def header_content(pagecontents, occurrence_min: int) -> set:
     maxdiff = 0.8  # TODO: HOLY VALUE
     counted = {
         key:
-            sum((val for current, val in collected.items() if utila.similar(
+            sum((val for current, val in collected.items() if utilo.similar(
                 expected=key, current=current, maxdiff=maxdiff)))
         for key in collected.keys()
     }
@@ -438,18 +438,18 @@ def header_content(pagecontents, occurrence_min: int) -> set:
 def matches(base, current) -> float:  # pylint:disable=R0911
     x0, y0, x1, y1 = base[0]
     xx0, yy0, xx1, yy1 = current[0]
-    if utila.rect_inside(base[0], current[0]):
+    if utilo.rect_inside(base[0], current[0]):
         return True
-    if utila.norm(x0, y0, xx0, yy0) > 50.0:
+    if utilo.norm(x0, y0, xx0, yy0) > 50.0:
         return False
-    if utila.norm(x1, y1, xx1, yy1) > 50.0:
+    if utilo.norm(x1, y1, xx1, yy1) > 50.0:
         return False
     if math.fabs(y1 - yy1) > 20.0:
         return False
     if math.fabs(y0 - yy0) > 20.0:
         return False
     # 30 percent
-    fontdiff = not utila.pnear(
+    fontdiff = not utilo.pnear(
         reference=(y1 - y0),
         current=(yy1 - yy0),
         rel_tol=0.3,

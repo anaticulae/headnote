@@ -10,9 +10,9 @@
 ============================================
 """
 
-import elements
+import elementae
 import iamraw
-import utila
+import utilo
 
 
 def parse(content: str):
@@ -38,24 +38,24 @@ def parse(content: str):
     return result
 
 
-@utila.cacheme
+@utilo.cacheme
 def parse_rawtext(text: str):
-    if text.count(utila.NEWLINE) <= 2:
+    if text.count(utilo.NEWLINE) <= 2:
         return None
     result = iamraw.RawText(text=text.strip())
     return result
 
 
-@utila.cacheme
+@utilo.cacheme
 def parse_pagenumber(text: str):
     text = text.strip()
-    if not elements.ispagenumber(text):
+    if not elementae.ispagenumber(text):
         return None
     result = iamraw.PageInformation(value=text, raw=text)
     return result
 
 
-@utila.cacheme
+@utilo.cacheme
 def parse_title(text: str) -> iamraw.HeaderTitle:
     regex = parse_title_regex(text)
     if regex:
@@ -67,7 +67,7 @@ def parse_title(text: str) -> iamraw.HeaderTitle:
 
 
 def parse_title_regex(text: str) -> iamraw.HeaderTitle:
-    parsed = elements.parse_headline(text)
+    parsed = elementae.parse_headline(text)
     if not parsed:
         return None
     result = iamraw.HeaderTitle(
@@ -79,7 +79,7 @@ def parse_title_regex(text: str) -> iamraw.HeaderTitle:
 
 def parse_title_contemporary(text: str) -> iamraw.HeaderTitle:
     """Analyze `text` based on a contemporary(`TITLES`) lookup"""
-    if not elements.isheadline(text):
+    if not elementae.isheadline(text):
         return None
     title = text.strip().title()
     result = iamraw.HeaderTitle(

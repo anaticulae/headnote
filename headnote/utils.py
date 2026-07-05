@@ -11,7 +11,7 @@ import math
 
 import iamraw
 import texmex
-import utila
+import utilo
 
 
 def rotate_ifrequired(navigators):
@@ -25,7 +25,7 @@ def rotate_ifrequired(navigators):
 
 def rotate_horizontals_ifrequired(horizontals, ptns):
     for horizontal in horizontals:
-        pagewidth = utila.select_page(ptns, horizontal.page).height
+        pagewidth = utilo.select_page(ptns, horizontal.page).height
         for hori in horizontal.content:
             x0, y0, x1, y1 = hori.box
             width = math.fabs(x0 - x1)

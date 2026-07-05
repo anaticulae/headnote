@@ -7,11 +7,11 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import genex
-import power
-import utilatest
-from utilatest import mp  # pylint:disable=W0611
-from utilatest import td  # pylint:disable=W0611
+import gennex
+import hoverpower
+import utilotest
+from utilotest import mp  # pylint:disable=W0611
+from utilotest import td  # pylint:disable=W0611
 
 import headnote
 
@@ -20,52 +20,52 @@ pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
 PACKAGE = headnote.PROCESS
 
 RESOURCES = [
-    (power.BACHELOR090_PDF, '0:25'),
-    (power.BOOK173_PDF, '0:100'),
-    (power.DISS264_PDF, '0:50'),
-    (power.DISS406_PDF, '0:75,100:150'),
-    (power.MASTER116_PDF, '50:117'),
-    genex.todo(
-        power.DISS172_PDF,
-        rawmaker=genex.CONFIG,
+    (hoverpower.BACHELOR090_PDF, '0:25'),
+    (hoverpower.BOOK173_PDF, '0:100'),
+    (hoverpower.DISS264_PDF, '0:50'),
+    (hoverpower.DISS406_PDF, '0:75,100:150'),
+    (hoverpower.MASTER116_PDF, '50:117'),
+    gennex.todo(
+        hoverpower.DISS172_PDF,
+        rawmaker=gennex.CONFIG,
         figureo=True,
         tablero=True,
         cleanup=True,
     ),
-    power.BACHELOR026_PDF,
-    power.BACHELOR037_PDF,
-    power.BACHELOR063_PDF,
-    power.BACHELOR111_PDF,
-    power.BACHELOR128_PDF,
-    power.DISS144_PDF,
-    power.DISS148_PDF,
-    power.DOCU027_PDF,
-    power.HC_DISS128,
-    power.HC_DISS148,
-    power.HC_DISS166,
-    power.HC_DISS171,
-    power.HC_DISS193,
-    power.MASTER072_PDF,
-    power.MASTER075_PDF,
-    power.MASTER110_PDF,
-    power.MASTER155_PDF,
-    power.MASTER193_PDF,
-    power.TECH019_PDF,
-    power.TECH024_PDF,
+    hoverpower.BACHELOR026_PDF,
+    hoverpower.BACHELOR037_PDF,
+    hoverpower.BACHELOR063_PDF,
+    hoverpower.BACHELOR111_PDF,
+    hoverpower.BACHELOR128_PDF,
+    hoverpower.DISS144_PDF,
+    hoverpower.DISS148_PDF,
+    hoverpower.DOCU027_PDF,
+    hoverpower.HC_DISS128,
+    hoverpower.HC_DISS148,
+    hoverpower.HC_DISS166,
+    hoverpower.HC_DISS171,
+    hoverpower.HC_DISS193,
+    hoverpower.MASTER072_PDF,
+    hoverpower.MASTER075_PDF,
+    hoverpower.MASTER110_PDF,
+    hoverpower.MASTER155_PDF,
+    hoverpower.MASTER193_PDF,
+    hoverpower.TECH019_PDF,
+    hoverpower.TECH024_PDF,
 ]
 
-WORKER = utilatest.worker_count(6, onci=len(RESOURCES))
+WORKER = utilotest.worker_count(6, onci=len(RESOURCES))
 
 
 def pytest_sessionstart(session):  # pylint:disable=W0613
-    power.run()
+    hoverpower.run()
 
 
-RAWMAKER = '--text --line --horizontals ' + genex.CONFIG
+RAWMAKER = '--text --line --horizontals ' + gennex.CONFIG
 
 
 def extract(resources):
-    genex.extract(
+    gennex.extract(
         resources,
         cleanup=True,
         oneline=None,

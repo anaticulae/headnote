@@ -7,11 +7,11 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import configo
+import configos
 import iamraw
-import utila
+import utilo
 
-ASSERT_HORIZONTAL_DIFF_MAX = configo.HV_FLOAT_PLUS(default=5.0)
+ASSERT_HORIZONTAL_DIFF_MAX = configos.HV_FLOAT_PLUS(default=5.0)
 
 
 def match(
@@ -32,7 +32,7 @@ def match(
     # TODO: Check y0/y1
     result = [
         item for item in content
-        if utila.near(item.box.y0, expected, diff=diff_max)
+        if utilo.near(item.box.y0, expected, diff=diff_max)
     ]
     result = [tuple(item.box) for item in result]
     return result
@@ -71,9 +71,9 @@ def biggest_hlinecluster_in_area(
     if not any(valid):
         # no cluster is in range
         return None
-    # remove clusters with to few elements
+    # remove clusters with to few elementae
     valid = [item for item in valid if len(item) >= min_group_size]
-    maximized = utila.select_maxi(
+    maximized = utilo.select_maxi(
         valid,
         count=max_group_count,
     )
