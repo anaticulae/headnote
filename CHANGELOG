@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v1.0.3 (2026-07-07)
+
+### Bug Fixes
+
+- **common**: Adjust interface
+  ([`d84c0e4`](https://github.com/anaticulae/headnote/commit/d84c0e44d43e872a76c1623ed5f4f179b4baeb51))
+
+### Chores
+
+- **requirements**: Upgrade pyproject.toml
+  ([`9272cf9`](https://github.com/anaticulae/headnote/commit/9272cf9d29422f5de598ef2616b33c08d23ae159))
+
+
 ## v1.0.2 (2026-07-05)
 
 ### Chores
