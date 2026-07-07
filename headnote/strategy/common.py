@@ -165,7 +165,7 @@ class PageExtension:
         clusters = utilo.three_side_equal_cluster(  # pylint:disable=E1123
             todo=with_box,
             max_diff=COMMON_HEADER_ERROR_MAX,
-            min_elementae=cluster_length_min,
+            min_elements=cluster_length_min,
         )
         if not clusters:
             return None
