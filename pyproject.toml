@@ -42,9 +42,9 @@ dev = [
     "gennex==1.0.3",
     "rawmaker>=2.40.5,<3.0.0",
     "pdflog>=1.0.2,<2.0.0",
-    "ibidem>=1.0.0,<2.0.0",
+    "ibidem>=1.0.2,<2.0.0",
     "groupmes>=1.1.0,<2.0.0",
-    "mundare>=1.0.1,<2.0.0",
+    "mundare>=1.0.2,<2.0.0",
 ]
 
 [project.urls]
